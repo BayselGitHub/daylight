@@ -10,7 +10,7 @@
 <style>
 :root{color-scheme:light;--bg:#f5f7fb;--surface:#fff;--ink:#20283a;--muted:#788397;--line:#e7ebf2;--accent:#586fe4;--accent2:#4059d0;--green:#27875e;--amber:#bb7d20;--red:#d65353;--shadow:0 14px 40px rgba(32,47,78,.065)}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}.wrap{max-width:1050px;margin:0 auto;padding:30px 20px 54px}
-.top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:24px}.brand{display:flex;align-items:center;gap:12px}.logo{width:43px;height:43px;border-radius:14px;background:linear-gradient(145deg,#8292f0,#5268db);display:grid;place-items:center;color:white;font-size:22px;box-shadow:0 8px 18px #536ee82b}.brand h1{font-size:21px;margin:0;letter-spacing:-.5px}.brand p{margin:1px 0 0;color:var(--muted);font-size:13px}.status{font-size:12px;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 12px;white-space:nowrap}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#d65353;margin-right:7px;box-shadow:0 0 0 3px #d653531a}.dot.online{background:#29a36a;box-shadow:0 0 0 3px #29a36a1a}.top-actions{display:flex;align-items:center;gap:9px}.connect-button{min-height:38px;white-space:nowrap}.connect-button.connected{background:#e8f6ee;color:#218050}.connect-button:disabled{opacity:.65;cursor:wait}
+.top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:24px}.brand{display:flex;align-items:center;gap:12px}.logo{width:43px;height:43px;border-radius:14px;background:linear-gradient(145deg,#8292f0,#5268db);display:grid;place-items:center;color:white;font-size:22px;box-shadow:0 8px 18px #536ee82b}.brand h1{font-size:21px;margin:0;letter-spacing:-.5px}.brand p{margin:1px 0 0;color:var(--muted);font-size:13px}.status{font-size:12px;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 12px;white-space:nowrap}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#d65353;margin-right:7px;box-shadow:0 0 0 3px #d653531a}.dot.online{background:#29a36a;box-shadow:0 0 0 3px #29a36a1a}.top-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.connect-button{min-height:38px;white-space:nowrap}.connect-button.connected{background:#e8f6ee;color:#218050}.connect-button:disabled{opacity:.65;cursor:wait}
 .layout{display:grid;grid-template-columns:minmax(270px,.85fr) minmax(340px,1.15fr);gap:17px;align-items:start}.panel{background:var(--surface);border:1px solid var(--line);border-radius:19px;padding:21px;box-shadow:var(--shadow);min-width:0}.panel+.panel{margin-top:17px}.panel h2{font-size:16px;margin:0 0 4px;letter-spacing:-.2px}.sub{font-size:13px;color:var(--muted);margin:0 0 18px}.field{margin:0 0 13px}.field label{display:block;font-size:11px;font-weight:700;letter-spacing:.45px;color:#68748b;margin:0 0 6px}.field input,.field select{width:100%;height:42px;border:1px solid #dfe5ee;border-radius:10px;padding:0 11px;background:#fff;color:var(--ink);font:inherit;outline:none}.field input:focus,.field select:focus{border-color:#8999f2;box-shadow:0 0 0 3px #586fe419}.row{display:grid;grid-template-columns:1fr 1fr;gap:11px}.checkrow{display:flex;align-items:center;gap:9px;color:#536078;font-size:13px;margin:4px 0 13px}.checkrow input{accent-color:var(--accent);width:16px;height:16px}.days-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;margin:3px 0 14px}.day-chip{display:flex;flex-direction:column;align-items:center;gap:4px;padding:7px 2px;border:1px solid var(--line);border-radius:9px;font-size:10px;font-weight:700;color:#59657c;cursor:pointer}.day-chip input{accent-color:var(--accent);margin:0;width:15px;height:15px}.day-chip:has(input:checked){background:#eef1ff;border-color:#cbd3ff;color:#465bc5}.end-fields{display:none;padding:12px 12px 1px;background:#f8f9fd;border:1px solid var(--line);border-radius:12px;margin:-1px 0 13px}.end-fields.visible{display:block}.primary,.secondary,.danger{border:0;border-radius:11px;min-height:42px;padding:0 15px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}.primary{width:100%;background:var(--accent);color:white;box-shadow:0 7px 17px #586fe42a}.primary:hover{background:var(--accent2)}.primary:disabled{opacity:.55;cursor:wait}.secondary{background:#eef1ff;color:#4b60cf}.secondary:hover{background:#e4e9ff}.danger{background:#fff0f0;color:var(--red)}.hint{font-size:11px;color:var(--muted);margin:10px 0 0}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}.count{font-size:11px;color:var(--muted);background:#f1f3f8;border-radius:20px;padding:5px 9px;white-space:nowrap}.events{display:flex;flex-direction:column;gap:9px}.event{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:13px;padding:12px 12px 12px 14px}.event-name{font-weight:680;font-size:13px;overflow-wrap:anywhere}.event-meta{font-size:11px;color:var(--muted);margin-top:3px}.tag{display:inline-block;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.45px;padding:3px 7px;border-radius:6px;margin-left:7px;vertical-align:1px}.low{background:#eaf7f0;color:var(--green)}.medium{background:#fff4df;color:var(--amber)}.high{background:#fff0f0;color:var(--red)}.remove{border:1px solid var(--line);background:#fff;color:#8b95a7;border-radius:9px;width:32px;height:32px;cursor:pointer;font-size:17px}.remove:hover{color:var(--red);border-color:#f0caca}.empty{border:1px dashed #dce3ee;border-radius:13px;padding:27px 14px;text-align:center;color:var(--muted);font-size:12px}.toolbar{display:flex;justify-content:flex-end;margin:-3px 0 13px}.text-link{font-size:12px;color:var(--accent);text-decoration:none;font-weight:700}.text-link:hover{text-decoration:underline}
 .setting-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}.range-line{display:flex;align-items:center;gap:11px}.range-line input{flex:1;accent-color:var(--accent)}.range-value{font-variant-numeric:tabular-nums;color:#5b6680;font-size:12px;min-width:35px;text-align:right}.switchline{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 15px;font-size:13px;color:#536078}.switchline input{width:18px;height:18px;accent-color:var(--accent)}.pomo-top{display:flex;align-items:center;justify-content:space-between;gap:15px}.pomo-clock{font-size:34px;line-height:1.2;font-weight:750;letter-spacing:-1px;font-variant-numeric:tabular-nums}.pomo-stage{font-size:12px;color:var(--muted);margin-top:4px}.pomo-actions{display:flex;flex-wrap:wrap;gap:8px;margin:15px 0}.pomo-actions button{flex:1 1 120px;min-width:0}.sessions{font-size:11px;color:var(--muted);margin-top:6px}.foot{text-align:center;font-size:11px;color:#9aa4b6;margin-top:22px}.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,14px);opacity:0;pointer-events:none;background:#25304a;color:#fff;padding:10px 15px;border-radius:10px;font-size:12px;transition:.2s;box-shadow:var(--shadow);max-width:calc(100% - 30px);z-index:5}.toast.show{opacity:1;transform:translate(-50%,0)}
 .log-list{display:flex;flex-direction:column;gap:9px}.log-tabs{display:flex;gap:7px;margin:0 0 14px}.log-tab{border:1px solid var(--line);background:#fff;color:#68748b;border-radius:9px;padding:8px 12px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}.log-tab.active{background:#eef1ff;border-color:#ccd4ff;color:#465bc5}.log-filter-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 10px;margin:0 0 8px}.log-filter-grid .field{margin-bottom:9px}.log-filter-grid input,.log-filter-grid select{width:100%;height:38px;border:1px solid #dfe5ee;border-radius:9px;padding:0 9px;background:#fff;color:var(--ink);font:inherit;font-size:12px}.log-filter-grid label{display:block;font-size:10px;font-weight:750;color:#68748b;margin:0 0 5px}.urgency-filter-field{grid-column:1/-1}.filter-title{display:block;font-size:10px;font-weight:750;color:#68748b;margin:0 0 7px}.urgency-options{display:flex;flex-wrap:wrap;gap:7px}.urgency-chip{position:relative;display:inline-flex!important;align-items:center;margin:0!important;cursor:pointer}.urgency-chip input{position:absolute;opacity:0;width:1px!important;height:1px!important;padding:0!important;margin:0!important}.urgency-chip span{display:inline-flex;align-items:center;min-height:34px;padding:0 12px;border:1px solid #dfe5ee;border-radius:999px;background:#fff;color:#69758a;font-size:11px;font-weight:750;letter-spacing:0;transition:background .15s,border-color .15s,color .15s}.urgency-chip input:checked+span{background:#eef1ff;border-color:#aab7ff;color:#4059d0}.urgency-chip input:focus-visible+span{outline:3px solid #cbd4ff;outline-offset:2px}.log-filter-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 0 12px;font-size:11px;color:var(--muted)}.pomo-log-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 13px}.pomo-stat{border:1px solid var(--line);background:#f9faff;border-radius:11px;padding:11px}.pomo-stat strong{display:block;font-size:18px;font-variant-numeric:tabular-nums}.pomo-stat span{font-size:10px;color:var(--muted)}.log-entry.pomo-focus{border-left-color:#6474db;background:#f8f9ff}.log-entry.pomo-break{border-left-color:#58a77b;background:#f7fcf8}.log-entry.pomo-long-break{border-left-color:#26734c;background:#f4faf6}.pomo-actions-row{display:flex;gap:8px;margin:15px 0}.pomo-actions-row button{flex:1}.log-entry{border:1px solid var(--line);border-left:4px solid #d9e0ec;border-radius:12px;padding:12px 13px;background:#fff}.log-entry.task{border-left-color:#7ba88d}.log-entry.pending{border-left-color:#d4a347;background:#fffdf8}.log-entry.adjustment{border-left-color:#8b72d6;background:#f8f6ff}.log-entry.task.completed{border-left-color:#4baf7b}.log-entry.task.not-completed{border-left-color:#c58a8a;background:#fffafa}.log-title{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.log-name{font-size:13px;font-weight:700;overflow-wrap:anywhere}.log-meta{font-size:11px;color:var(--muted);margin-top:3px}.coin-chip{font-size:11px;font-weight:800;padding:5px 8px;border-radius:8px;white-space:nowrap;background:#eef1f5;color:#758095}.coin-chip.positive{background:#e8f6ee;color:#218050}.coin-chip.negative{background:#fff0f0;color:#c84949}.coin-chip.manual{background:#eee9ff;color:#684fc0}.log-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.log-actions button{min-height:34px;padding:0 11px;font-size:11px;width:auto}.wallet-balance{font-size:30px;font-weight:800;letter-spacing:-.8px;font-variant-numeric:tabular-nums;color:#3d4e9f;margin:3px 0 14px}.wallet-balance small{font-size:13px;font-weight:650;letter-spacing:0;color:var(--muted)}.log-empty{border:1px dashed #dce3ee;border-radius:13px;padding:23px 14px;text-align:center;color:var(--muted);font-size:12px}.log-capacity-warning{border:1px solid #f0d7a3;background:#fff9eb;color:#8a641e;border-radius:10px;padding:10px 12px;font-size:11px;margin:0 0 10px}
@@ -26,7 +26,7 @@
 @media(max-width:760px){
   .wrap{padding:calc(env(safe-area-inset-top,0px) + 14px) 12px calc(env(safe-area-inset-bottom,0px) + 30px)}
   .top{align-items:flex-start;flex-wrap:wrap;gap:12px}
-  .top-actions{width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+  .top-actions{width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px}
   .status{white-space:normal;display:flex;align-items:center;min-height:44px;min-width:0;overflow-wrap:anywhere}
   .connect-button{min-height:44px;padding:0 12px}
   .main-tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:4;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;padding:5px}
@@ -47,6 +47,10 @@
   .brand h1{font-size:19px}
   .brand p{font-size:12px}
   .top-actions{grid-template-columns:minmax(0,1fr)}
+  .top-actions .status{white-space:normal;overflow-wrap:anywhere}
+  .top-actions button{width:100%;min-height:42px}
+  .top-actions .status{white-space:normal;overflow-wrap:anywhere}
+  .top-actions button{width:100%;min-height:42px}
   .status{min-height:38px;padding:7px 10px}
   .connect-button{width:100%;min-height:46px}
   .main-tabs{margin-bottom:12px}
@@ -141,7 +145,7 @@ button{ -webkit-tap-highlight-color:transparent }
 <div class="wrap">
   <header class="top">
     <div class="brand"><div class="logo">✓</div><div><h1>Daylight</h1><p>Your plans, directly over Bluetooth</p></div></div>
-    <div class="top-actions"><div class="status"><span id="dot" class="dot"></span><span id="connection">Bluetooth not connected</span></div><button class="secondary connect-button" id="bleConnectButton" type="button">Connect Bluetooth</button></div>
+    <div class="top-actions"><div class="status"><span id="dot" class="dot"></span><span id="connection">Bluetooth not connected</span></div><button class="secondary connect-button" id="bleConnectButton" type="button">Connect Bluetooth</button><button class="secondary connect-button" id="enableNotificationsButton" type="button" disabled>Enable notifications</button></div>
   </header>
   <nav class="main-tabs" role="tablist" aria-label="Main sections">
     <button class="main-tab active" id="mainAddTab" type="button" role="tab" aria-selected="true" aria-controls="mainAddPane">Add events</button>
@@ -286,11 +290,20 @@ function esc(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<'
 const BLE_SERVICE_UUID='7d2ea28a-f7bd-485a-bd9d-92ad6ecfe93e';
 const BLE_RX_UUID='7d2ea28b-f7bd-485a-bd9d-92ad6ecfe93e';
 const BLE_TX_UUID='7d2ea28c-f7bd-485a-bd9d-92ad6ecfe93e';
-const BLE_RX_MAGIC=0xD1,BLE_TX_MAGIC=0xD2,BLE_HEADER_BYTES=5;
-let bleDevice=null,bleGatt=null,bleRxCharacteristic=null,bleTxCharacteristic=null;
+const BLE_ALERT_UUID='7d2ea28d-f7bd-485a-bd9d-92ad6ecfe93e';
+const BLE_DEVICE_NAME='Daylight-Todo';
+const BLE_RX_MAGIC=0xD1,BLE_TX_MAGIC=0xD2,BLE_HEADER_BYTES=9;
+let bleDevice=null,bleGatt=null,bleRxCharacteristic=null,bleTxCharacteristic=null,bleAlertCharacteristic=null;
 let bleConnected=false,blePendingResponse=null,bleResponseParts=[],bleExpectedResponseSequence=0,bleResponseTotalBytes=0;
 let blePreferredWriteSize=200,dashboardLoaded=false,bleDisconnectHandler=null,bleSessionId=0;
+let bleClientTag=0;
+let desktopNotificationsEnabled=localStorage.getItem('daylightDesktopNotifications')==='1';
+let alertNotificationsSubscribed=false;
 const BLE_MAX_RESPONSE_BYTES=24003;
+function newBleClientTag(){
+  const values=new Uint32Array(1);crypto.getRandomValues(values);
+  return values[0]||1;
+}
 
 function setBleConnectionState(connected,message){
   const wasConnected=bleConnected;
@@ -299,6 +312,8 @@ function setBleConnectionState(connected,message){
   $('connection').textContent=message;
   $('bleConnectButton').textContent=connected?'Connected · Disconnect':(dashboardLoaded?'Connect Bluetooth':'Connect Bluetooth');
   $('bleConnectButton').classList.toggle('connected',connected);
+  $('enableNotificationsButton').disabled=!connected;
+  $('enableNotificationsButton').textContent=localStorage.getItem('daylightBeacioNotifications')==='1'?'iPhone alerts enabled':(desktopNotificationsEnabled?'Notifications enabled':'Enable notifications');
   document.querySelectorAll('.main-tab').forEach(tab=>tab.disabled=!connected);
   if(!connected){
     if(wasConnected||bleGatt)bleSessionId++;
@@ -309,24 +324,32 @@ function setBleConnectionState(connected,message){
     // automatically: purchase/task POSTs must remain exactly-once from the UI.
     while(apiQueue.length){const queued=apiQueue.shift();queued.reject(error)}
     apiGetInflight.clear();
-    bleRxCharacteristic=null;bleTxCharacteristic=null;bleGatt=null;
+    bleRxCharacteristic=null;bleTxCharacteristic=null;bleAlertCharacteristic=null;bleGatt=null;alertNotificationsSubscribed=false;
   }
 }
 async function sendBleAck(sequence){
   if(!bleRxCharacteristic||!bleConnected)throw Error('Bluetooth disconnected before confirming a response chunk.');
-  const ack=new Uint8Array([BLE_RX_MAGIC,sequence&255,(sequence>>8)&255,0x80,0]);
+  const ack=new Uint8Array([
+    BLE_RX_MAGIC,
+    bleClientTag&255,(bleClientTag>>>8)&255,(bleClientTag>>>16)&255,(bleClientTag>>>24)&255,
+    sequence&255,(sequence>>8)&255,0x80,0
+  ]);
   if(bleRxCharacteristic.writeValueWithResponse)await bleRxCharacteristic.writeValueWithResponse(ack);
   else if(bleRxCharacteristic.writeValue)await bleRxCharacteristic.writeValue(ack);
   else throw Error('This browser cannot acknowledge BLE response packets.');
 }
 async function onBleNotification(event){
+  const view=event.target.value;
+  const bytes=new Uint8Array(view.buffer,view.byteOffset,view.byteLength);
+  // All subscribed centrals receive TX notifications. Ignore packets meant for
+  // the other browser session before touching this client's response state.
+  if(bytes.length<BLE_HEADER_BYTES||bytes[0]!==BLE_TX_MAGIC)return;
+  const token=(bytes[1]|(bytes[2]<<8)|(bytes[3]<<16)|(bytes[4]<<24))>>>0;
+  if(token!==bleClientTag)return;
   const pending=blePendingResponse;
   if(!pending)return;
   try{
-    const view=event.target.value;
-    const bytes=new Uint8Array(view.buffer,view.byteOffset,view.byteLength);
-    if(bytes.length<BLE_HEADER_BYTES||bytes[0]!==BLE_TX_MAGIC)throw Error('Invalid BLE response frame.');
-    const sequence=bytes[1]|(bytes[2]<<8),flags=bytes[3],payloadLength=bytes[4];
+    const sequence=bytes[5]|(bytes[6]<<8),flags=bytes[7],payloadLength=bytes[8];
     if(payloadLength>bytes.length-BLE_HEADER_BYTES)throw Error('Invalid BLE response payload length.');
     if(sequence===0){bleResponseParts=[];bleExpectedResponseSequence=0;bleResponseTotalBytes=0}
     if(sequence!==bleExpectedResponseSequence)throw Error(`BLE response sequence mismatch (expected ${bleExpectedResponseSequence}, received ${sequence}).`);
@@ -335,9 +358,6 @@ async function onBleNotification(event){
     if(bleResponseTotalBytes>BLE_MAX_RESPONSE_BYTES)throw Error('The BLE response exceeded the client safety limit.');
     bleResponseParts.push(payloadPart);
     bleExpectedResponseSequence++;
-
-    // The ESP32 waits for this application ACK before sending its next frame.
-    // Awaiting the write also prevents a following API request racing the final ACK.
     await sendBleAck(sequence);
     if(pending!==blePendingResponse)return;
     if(flags&1){
@@ -347,15 +367,16 @@ async function onBleNotification(event){
     }
   }catch(error){
     if(pending===blePendingResponse){blePendingResponse=null;pending.reject(error)}
-    // A framing/ACK failure leaves the ESP32 waiting for a packet. Reset the
-    // transport rather than allowing the next queued API call to corrupt it.
     if(bleDevice?.gatt?.connected)bleDevice.gatt.disconnect();
   }
 }
 
 function buildBleFrame(sequence,final,payload,frameSize,actualLength){
-  const frame=new Uint8Array(frameSize);frame[0]=BLE_RX_MAGIC;frame[1]=sequence&255;frame[2]=(sequence>>8)&255;
-  frame[3]=final?1:0;frame[4]=actualLength;frame.set(payload, BLE_HEADER_BYTES);return frame;
+  const frame=new Uint8Array(frameSize);
+  frame[0]=BLE_RX_MAGIC;
+  frame[1]=bleClientTag&255;frame[2]=(bleClientTag>>>8)&255;frame[3]=(bleClientTag>>>16)&255;frame[4]=(bleClientTag>>>24)&255;
+  frame[5]=sequence&255;frame[6]=(sequence>>8)&255;frame[7]=final?1:0;frame[8]=actualLength;
+  frame.set(payload,BLE_HEADER_BYTES);return frame;
 }
 async function writeBleMessage(bytes,frameSize){
   const maxPayload=frameSize-BLE_HEADER_BYTES;let offset=0,sequence=0;
@@ -367,6 +388,7 @@ async function writeBleMessage(bytes,frameSize){
     offset+=length;sequence++;
   }while(offset<bytes.length);
 }
+
 async function performBleRequest(task){
   if(!bleConnected||!bleRxCharacteristic||!bleTxCharacteristic)throw Error('Connect to Daylight over Bluetooth first.');
   const requestSession=bleSessionId;
@@ -399,6 +421,72 @@ async function performBleRequest(task){
     throw error;
   }
 }
+
+function onBleTaskAlert(event){
+  const view=event.target.value;
+  const bytes=new Uint8Array(view.buffer,view.byteOffset,view.byteLength);
+  const raw=new TextDecoder().decode(bytes);
+  // First byte is an invisible changing marker for Beacio's 'changed' condition.
+  const body=raw.length>1?raw.slice(1):raw;
+  if(desktopNotificationsEnabled&&'Notification' in window&&Notification.permission==='granted'){
+    try{new Notification('Daylight task reminder',{body:body||'A scheduled task is due.',icon:'./icon-192.png',tag:`daylight-${Date.now()}`,renotify:true})}
+    catch(error){console.warn('Could not show desktop notification',error)}
+  }
+  if(body)toast(`Reminder: ${body}`);
+}
+async function subscribeTaskAlerts(){
+  if(!bleConnected||!bleAlertCharacteristic)throw Error('Connect to Daylight before enabling task notifications.');
+  if(alertNotificationsSubscribed)return;
+  await bleAlertCharacteristic.startNotifications();
+  bleAlertCharacteristic.addEventListener('characteristicvaluechanged',onBleTaskAlert);
+  alertNotificationsSubscribed=true;
+}
+async function enableTaskNotifications(){
+  if(!bleConnected||!bleDevice)throw Error('Connect to Daylight first.');
+  const backgroundSync=navigator.beacio?.backgroundSync||window.beacioIOS?.backgroundSync||window.beacio?.backgroundSync;
+  if(backgroundSync){
+    // Beacio requires this permission call directly from the user's tap.
+    const permission=await backgroundSync.requestPermission();
+    if(permission!=='granted')throw Error('Allow Beacio background notifications, then try again.');
+    await backgroundSync.requestBackgroundConnection({deviceId:bleDevice.id});
+    const template={title:'Daylight task reminder',body:'{{value.utf8}}',url:location.href,sound:true};
+    const registrations=await backgroundSync.getRegistrations();
+    const savedId=localStorage.getItem('daylightBeacioAlertRegistration');
+    let registration=registrations.find(item=>item.id===savedId&&item.type==='characteristic-notification');
+    if(registration&&typeof registration.update==='function'){
+      await registration.update(template);
+    }else{
+      registration=await backgroundSync.registerCharacteristicNotifications({
+        deviceId:bleDevice.id,
+        serviceUUID:BLE_SERVICE_UUID,
+        characteristicUUID:BLE_ALERT_UUID,
+        condition:{decode:'uint8',operator:'changed',threshold:0},
+        cooldownSeconds:1,
+        template
+      });
+      if(registration?.id)localStorage.setItem('daylightBeacioAlertRegistration',registration.id);
+    }
+    localStorage.setItem('daylightBeacioNotifications','1');
+    $('enableNotificationsButton').textContent='iPhone alerts enabled';
+    toast('Beacio background task notifications enabled');
+    return;
+  }
+
+  if(!('Notification' in window))throw Error('This browser does not support notifications.');
+  const permission=await Notification.requestPermission();
+  if(permission!=='granted')throw Error('Allow desktop notifications in your browser settings.');
+  desktopNotificationsEnabled=true;
+  localStorage.setItem('daylightDesktopNotifications','1');
+  await subscribeTaskAlerts();
+  $('enableNotificationsButton').textContent='Notifications enabled';
+  toast('Desktop task notifications enabled');
+}
+$('enableNotificationsButton').addEventListener('click',async()=>{
+  const button=$('enableNotificationsButton');button.disabled=true;
+  try{await enableTaskNotifications()}
+  catch(error){toast(error.message||'Could not enable notifications.')}
+  finally{button.disabled=!bleConnected}
+});
 
 const apiQueue=[];let apiRunning=false,apiSequence=0;const apiGetInflight=new Map();
 function api(url,options={}){
@@ -476,40 +564,63 @@ document.querySelectorAll('a[href^="/api/"]').forEach(link=>link.addEventListene
   }catch(err){toast(err.message)}finally{link.textContent=original}
 }));
 
+async function attachBleDevice(selectedDevice){
+  if(bleDevice&&bleDisconnectHandler)bleDevice.removeEventListener('gattserverdisconnected',bleDisconnectHandler);
+  bleDevice=selectedDevice;
+  bleClientTag=newBleClientTag();
+  bleDisconnectHandler=()=>setBleConnectionState(false,'Bluetooth disconnected · device status is red');
+  bleDevice.addEventListener('gattserverdisconnected',bleDisconnectHandler);
+  // getDevices() may return a device whose GATT link survived an app/page
+  // refresh (notably when a companion app is holding the iOS background link).
+  bleGatt=bleDevice.gatt.connected?bleDevice.gatt:await bleDevice.gatt.connect();
+  const service=await bleGatt.getPrimaryService(BLE_SERVICE_UUID);
+  bleRxCharacteristic=await service.getCharacteristic(BLE_RX_UUID);
+  bleTxCharacteristic=await service.getCharacteristic(BLE_TX_UUID);
+  bleAlertCharacteristic=await service.getCharacteristic(BLE_ALERT_UUID);
+  await bleTxCharacteristic.startNotifications();
+  bleTxCharacteristic.removeEventListener('characteristicvaluechanged',onBleNotification);
+  bleTxCharacteristic.addEventListener('characteristicvaluechanged',onBleNotification);
+  blePreferredWriteSize=200;
+  setBleConnectionState(true,`Connected · ${bleDevice.name||'Daylight'} · syncing clock`);
+  if(desktopNotificationsEnabled&&'Notification' in window&&Notification.permission==='granted'){
+    try{await subscribeTaskAlerts()}catch(error){console.warn('Desktop alert subscription failed',error)}
+  }
+  try{await initialiseDashboardAfterBle();toast('Connected to Daylight over Bluetooth')}
+  catch(error){dashboardLoaded=false;setBleConnectionState(true,'Bluetooth connected · dashboard sync needs retry');throw Error(`Connected, but initial sync failed: ${error.message}. Tap Connected to retry.`)}
+}
+async function findPreviouslyGrantedDaylight(){
+  if(typeof navigator.bluetooth?.getDevices!=='function')return null;
+  try{
+    const devices=await navigator.bluetooth.getDevices();
+    return devices.find(device=>device.name===BLE_DEVICE_NAME||device.name?.startsWith('Daylight-Todo'))||null;
+  }catch(error){console.debug('Previously granted BLE device lookup unavailable',error);return null}
+}
 async function connectBle(){
-  if(!navigator.bluetooth){toast('Bluetooth web access requires Chrome or Edge and a secure HTTPS app.');return}
+  if(!navigator.bluetooth){toast('Bluetooth requires a compatible Web Bluetooth browser and HTTPS.');return}
   if(bleConnected&&bleDevice?.gatt?.connected){
-    if(!dashboardLoaded){
-      const button=$('bleConnectButton');button.disabled=true;
-      try{await initialiseDashboardAfterBle();toast('Daylight dashboard synchronised')}
-      catch(error){toast(`Bluetooth is connected, but dashboard sync failed: ${error.message}`)}
-      finally{button.disabled=false}
-      return;
-    }
+    if(!dashboardLoaded){const button=$('bleConnectButton');button.disabled=true;try{await initialiseDashboardAfterBle();toast('Daylight dashboard synchronised')}catch(error){toast(`Bluetooth is connected, but dashboard sync failed: ${error.message}`)}finally{button.disabled=false}return}
     bleDevice.gatt.disconnect();return;
   }
   const button=$('bleConnectButton');button.disabled=true;button.textContent='Finding Daylight…';
   try{
-    const selectedDevice=await navigator.bluetooth.requestDevice({filters:[{services:[BLE_SERVICE_UUID]}]});
-    if(bleDevice&&bleDisconnectHandler)bleDevice.removeEventListener('gattserverdisconnected',bleDisconnectHandler);
-    bleDevice=selectedDevice;
-    bleDisconnectHandler=()=>setBleConnectionState(false,'Bluetooth disconnected · device status is red');
-    bleDevice.addEventListener('gattserverdisconnected',bleDisconnectHandler);
-    bleGatt=await bleDevice.gatt.connect();
-    const service=await bleGatt.getPrimaryService(BLE_SERVICE_UUID);
-    bleRxCharacteristic=await service.getCharacteristic(BLE_RX_UUID);
-    bleTxCharacteristic=await service.getCharacteristic(BLE_TX_UUID);
-    await bleTxCharacteristic.startNotifications();
-    bleTxCharacteristic.addEventListener('characteristicvaluechanged',onBleNotification);
-    blePreferredWriteSize=200;
-    setBleConnectionState(true,`Connected · ${bleDevice.name||'Daylight'} · syncing clock`);
-    try{await initialiseDashboardAfterBle();toast('Connected to Daylight over Bluetooth')}
-    catch(error){dashboardLoaded=false;setBleConnectionState(true,'Bluetooth connected · dashboard sync needs retry');toast(`Connected, but initial sync failed: ${error.message}. Tap Connected to retry.`)}
+    // First attempt silent recovery using a device that this origin was already
+    // granted. Only show the chooser if no known device can be reattached.
+    let selectedDevice=await findPreviouslyGrantedDaylight();
+    if(selectedDevice){
+      try{await attachBleDevice(selectedDevice);return}
+      catch(reconnectError){
+        console.warn('Reconnecting the previously granted device failed; opening chooser.',reconnectError);
+        if(selectedDevice.gatt?.connected)selectedDevice.gatt.disconnect();
+        setBleConnectionState(false,'Saved Daylight device found · retrying connection');
+      }
+    }
+    selectedDevice=await navigator.bluetooth.requestDevice({filters:[{services:[BLE_SERVICE_UUID]}]});
+    await attachBleDevice(selectedDevice);
   }catch(error){
     if(bleDevice?.gatt?.connected)bleDevice.gatt.disconnect();
     setBleConnectionState(false,'Bluetooth disconnected');
     toast(error.message||'Could not connect to Daylight.');
-  }finally{button.disabled=false}
+  }finally{button.disabled=false;button.textContent=bleConnected?'Connected · Disconnect':'Connect Bluetooth'}
 }
 $('bleConnectButton').addEventListener('click',connectBle);
 
@@ -838,7 +949,25 @@ $('durationEnabled').addEventListener('change',()=>{$('endFields').classList.tog
 $('date').addEventListener('change',()=>{if($('durationEnabled').checked&&(!$('endDate').value||$('endDate').value<$('date').value))$('endDate').value=$('date').value});
 $('eventForm').addEventListener('submit',async e=>{e.preventDefault();const b=$('addButton');b.disabled=true;try{const duration=$('durationEnabled').checked;const payload={name:$('name').value.trim(),date:$('date').value,time:$('time').value,endDate:duration?$('endDate').value:'',endTime:duration?$('endTime').value:'',urgency:$('urgency').value};await api('/api/events',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});$('name').value='';toast('Event saved');refreshEvents(2)}catch(err){toast(err.message)}finally{b.disabled=false}});
 const repeatDayIds=[0,1,2,3,4,5,6].map(day=>'repeatDay'+day);
-$('repeatForm').addEventListener('submit',async e=>{e.preventDefault();const b=$('repeatAddButton');b.disabled=true;try{const daysMask=repeatDayIds.reduce((mask,id,day)=>$(id).checked?(mask|(1<<day)):mask,0);if(!daysMask)throw Error('Select at least one day for this activity.');const payload={name:$('repeatName').value.trim(),time:$('repeatTime').value,endTime:$('repeatEndTime').value,daysMask,urgency:$('repeatUrgency').value};await api('/api/repeats',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});$('repeatName').value='';$('repeatEndTime').value='';toast('Repeating activity saved');refreshEvents(2)}catch(err){toast(err.message)}finally{b.disabled=false}});
+function getSaudiLocalParts(date=new Date()){
+  const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Riyadh',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(date);
+  const value=Object.fromEntries(parts.map(part=>[part.type,part.value]));
+  return {date:`${value.year}-${value.month}-${value.day}`,time:`${value.hour}:${value.minute}`};
+}
+function nextSelectedRepeatDate(daysMask,startTime){
+  const now=getSaudiLocalParts();
+  const [year,month,day]=now.date.split('-').map(Number);
+  for(let offset=0;offset<=7;offset++){
+    const date=new Date(Date.UTC(year,month-1,day+offset));
+    const weekday=date.getUTCDay();
+    if(!(daysMask&(1<<weekday)))continue;
+    const candidate=[date.getUTCFullYear(),String(date.getUTCMonth()+1).padStart(2,'0'),String(date.getUTCDate()).padStart(2,'0')].join('-');
+    if(candidate===now.date&&startTime<=now.time)continue;
+    return candidate;
+  }
+  return null;
+}
+$('repeatForm').addEventListener('submit',async e=>{e.preventDefault();const b=$('repeatAddButton');b.disabled=true;try{const daysMask=repeatDayIds.reduce((mask,id,day)=>$(id).checked?(mask|(1<<day)):mask,0);if(!daysMask)throw Error('Select at least one day for this activity.');const name=$('repeatName').value.trim(),time=$('repeatTime').value;const firstDate=nextSelectedRepeatDate(daysMask,time);if(!firstDate)throw Error('The selected weekdays do not have a future occurrence at that time. Choose a later time or another weekday.');const payload={name,time,endTime:$('repeatEndTime').value,daysMask,urgency:$('repeatUrgency').value};const result=await api('/api/repeats',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});$('repeatName').value='';$('repeatEndTime').value='';toast(`Repeating activity saved · first occurrence ${result.firstOccurrenceDate||firstDate}`);refreshEvents(2)}catch(err){toast(err.message)}finally{b.disabled=false}});
 function updateRangeText(id){$(id+'Value').textContent=$(id).value+'%'}
 ['nightBrightness','nightRedTintPercent','dayBrightness'].forEach(id=>$(id).addEventListener('input',()=>updateRangeText(id)));
 async function loadSettings(priority=1){try{const s=await api('/api/settings',{priority});$('nightEnabled').checked=s.nightDimmingEnabled;$('nightStart').value=s.nightStart;$('nightEnd').value=s.nightEnd;$('nightBrightness').value=s.nightBrightness;$('nightRedTintEnabled').checked=!!s.nightRedTintEnabled;$('nightRedTintPercent').value=s.nightRedTintPercent??20;$('dayBrightness').value=s.dayBrightness;updateRangeText('nightBrightness');updateRangeText('nightRedTintPercent');updateRangeText('dayBrightness')}catch(e){toast('Could not load display settings')}}
@@ -955,7 +1084,17 @@ async function init(){
   const d=new Date();$('date').value=[d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-');
   $('endDate').value=$('date').value;
   setBleConnectionState(false,'Bluetooth not connected');
-  if(!navigator.bluetooth){$('connection').textContent='Chrome / Edge required · HTTPS app';$('bleConnectButton').textContent='Browser unsupported';$('bleConnectButton').title='Web Bluetooth is unavailable in Firefox and Safari.'}
+  if(!navigator.bluetooth){$('connection').textContent='Bluetooth unavailable · use Beacio on iPhone or a Web Bluetooth browser';$('bleConnectButton').textContent='Browser unsupported';$('bleConnectButton').title='This browser does not expose Web Bluetooth.';return}
+  // On refresh, navigator.bluetooth.getDevices() restores the site's existing
+  // grant. Reuse the active GATT session where the browser/Beacio preserves it.
+  try{
+    const savedDevice=await findPreviouslyGrantedDaylight();
+    if(savedDevice){
+      $('bleConnectButton').disabled=true;$('bleConnectButton').textContent='Reconnecting…';
+      try{await attachBleDevice(savedDevice)}catch(error){console.warn('Automatic BLE reconnect will need a user tap:',error);setBleConnectionState(false,'Saved Daylight device found · tap Connect to retry')}
+      finally{$('bleConnectButton').disabled=false;$('bleConnectButton').textContent=bleConnected?'Connected · Disconnect':'Connect Bluetooth'}
+    }
+  }catch(error){console.debug('Automatic BLE reconnect skipped',error)}
 }
 init();
 </script>

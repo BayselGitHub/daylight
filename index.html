@@ -1,0 +1,744 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f6f8fc">
+<link rel="manifest" href="./manifest.webmanifest">
+<title>Daylight · Todo</title>
+<style>
+:root{color-scheme:light;--bg:#f5f7fb;--surface:#fff;--ink:#20283a;--muted:#788397;--line:#e7ebf2;--accent:#586fe4;--accent2:#4059d0;--green:#27875e;--amber:#bb7d20;--red:#d65353;--shadow:0 14px 40px rgba(32,47,78,.065)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}.wrap{max-width:1050px;margin:0 auto;padding:30px 20px 54px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:24px}.brand{display:flex;align-items:center;gap:12px}.logo{width:43px;height:43px;border-radius:14px;background:linear-gradient(145deg,#8292f0,#5268db);display:grid;place-items:center;color:white;font-size:22px;box-shadow:0 8px 18px #536ee82b}.brand h1{font-size:21px;margin:0;letter-spacing:-.5px}.brand p{margin:1px 0 0;color:var(--muted);font-size:13px}.status{font-size:12px;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 12px;white-space:nowrap}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#d3a03d;margin-right:7px}.dot.online{background:#29a36a}.top-actions{display:flex;align-items:center;gap:9px}.connect-button{min-height:38px;white-space:nowrap}.connect-button.connected{background:#e8f6ee;color:#218050}.connect-button:disabled{opacity:.65;cursor:wait}
+.layout{display:grid;grid-template-columns:minmax(270px,.85fr) minmax(340px,1.15fr);gap:17px;align-items:start}.panel{background:var(--surface);border:1px solid var(--line);border-radius:19px;padding:21px;box-shadow:var(--shadow);min-width:0}.panel+.panel{margin-top:17px}.panel h2{font-size:16px;margin:0 0 4px;letter-spacing:-.2px}.sub{font-size:13px;color:var(--muted);margin:0 0 18px}.field{margin:0 0 13px}.field label{display:block;font-size:11px;font-weight:700;letter-spacing:.45px;color:#68748b;margin:0 0 6px}.field input,.field select{width:100%;height:42px;border:1px solid #dfe5ee;border-radius:10px;padding:0 11px;background:#fff;color:var(--ink);font:inherit;outline:none}.field input:focus,.field select:focus{border-color:#8999f2;box-shadow:0 0 0 3px #586fe419}.row{display:grid;grid-template-columns:1fr 1fr;gap:11px}.checkrow{display:flex;align-items:center;gap:9px;color:#536078;font-size:13px;margin:4px 0 13px}.checkrow input{accent-color:var(--accent);width:16px;height:16px}.days-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;margin:3px 0 14px}.day-chip{display:flex;flex-direction:column;align-items:center;gap:4px;padding:7px 2px;border:1px solid var(--line);border-radius:9px;font-size:10px;font-weight:700;color:#59657c;cursor:pointer}.day-chip input{accent-color:var(--accent);margin:0;width:15px;height:15px}.day-chip:has(input:checked){background:#eef1ff;border-color:#cbd3ff;color:#465bc5}.end-fields{display:none;padding:12px 12px 1px;background:#f8f9fd;border:1px solid var(--line);border-radius:12px;margin:-1px 0 13px}.end-fields.visible{display:block}.primary,.secondary,.danger{border:0;border-radius:11px;min-height:42px;padding:0 15px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}.primary{width:100%;background:var(--accent);color:white;box-shadow:0 7px 17px #586fe42a}.primary:hover{background:var(--accent2)}.primary:disabled{opacity:.55;cursor:wait}.secondary{background:#eef1ff;color:#4b60cf}.secondary:hover{background:#e4e9ff}.danger{background:#fff0f0;color:var(--red)}.hint{font-size:11px;color:var(--muted);margin:10px 0 0}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}.count{font-size:11px;color:var(--muted);background:#f1f3f8;border-radius:20px;padding:5px 9px;white-space:nowrap}.events{display:flex;flex-direction:column;gap:9px}.event{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:13px;padding:12px 12px 12px 14px}.event-name{font-weight:680;font-size:13px;overflow-wrap:anywhere}.event-meta{font-size:11px;color:var(--muted);margin-top:3px}.tag{display:inline-block;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.45px;padding:3px 7px;border-radius:6px;margin-left:7px;vertical-align:1px}.low{background:#eaf7f0;color:var(--green)}.medium{background:#fff4df;color:var(--amber)}.high{background:#fff0f0;color:var(--red)}.remove{border:1px solid var(--line);background:#fff;color:#8b95a7;border-radius:9px;width:32px;height:32px;cursor:pointer;font-size:17px}.remove:hover{color:var(--red);border-color:#f0caca}.empty{border:1px dashed #dce3ee;border-radius:13px;padding:27px 14px;text-align:center;color:var(--muted);font-size:12px}.toolbar{display:flex;justify-content:flex-end;margin:-3px 0 13px}.text-link{font-size:12px;color:var(--accent);text-decoration:none;font-weight:700}.text-link:hover{text-decoration:underline}
+.setting-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}.range-line{display:flex;align-items:center;gap:11px}.range-line input{flex:1;accent-color:var(--accent)}.range-value{font-variant-numeric:tabular-nums;color:#5b6680;font-size:12px;min-width:35px;text-align:right}.switchline{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 15px;font-size:13px;color:#536078}.switchline input{width:18px;height:18px;accent-color:var(--accent)}.pomo-top{display:flex;align-items:center;justify-content:space-between;gap:15px}.pomo-clock{font-size:34px;line-height:1.2;font-weight:750;letter-spacing:-1px;font-variant-numeric:tabular-nums}.pomo-stage{font-size:12px;color:var(--muted);margin-top:4px}.pomo-actions{display:flex;flex-wrap:wrap;gap:8px;margin:15px 0}.pomo-actions button{flex:1 1 120px;min-width:0}.sessions{font-size:11px;color:var(--muted);margin-top:6px}.foot{text-align:center;font-size:11px;color:#9aa4b6;margin-top:22px}.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,14px);opacity:0;pointer-events:none;background:#25304a;color:#fff;padding:10px 15px;border-radius:10px;font-size:12px;transition:.2s;box-shadow:var(--shadow);max-width:calc(100% - 30px);z-index:5}.toast.show{opacity:1;transform:translate(-50%,0)}
+.log-list{display:flex;flex-direction:column;gap:9px}.log-tabs{display:flex;gap:7px;margin:0 0 14px}.log-tab{border:1px solid var(--line);background:#fff;color:#68748b;border-radius:9px;padding:8px 12px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}.log-tab.active{background:#eef1ff;border-color:#ccd4ff;color:#465bc5}.log-filter-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 10px;margin:0 0 8px}.log-filter-grid .field{margin-bottom:9px}.log-filter-grid input,.log-filter-grid select{width:100%;height:38px;border:1px solid #dfe5ee;border-radius:9px;padding:0 9px;background:#fff;color:var(--ink);font:inherit;font-size:12px}.log-filter-grid label{display:block;font-size:10px;font-weight:750;color:#68748b;margin:0 0 5px}.urgency-filter-field{grid-column:1/-1}.filter-title{display:block;font-size:10px;font-weight:750;color:#68748b;margin:0 0 7px}.urgency-options{display:flex;flex-wrap:wrap;gap:7px}.urgency-chip{position:relative;display:inline-flex!important;align-items:center;margin:0!important;cursor:pointer}.urgency-chip input{position:absolute;opacity:0;width:1px!important;height:1px!important;padding:0!important;margin:0!important}.urgency-chip span{display:inline-flex;align-items:center;min-height:34px;padding:0 12px;border:1px solid #dfe5ee;border-radius:999px;background:#fff;color:#69758a;font-size:11px;font-weight:750;letter-spacing:0;transition:background .15s,border-color .15s,color .15s}.urgency-chip input:checked+span{background:#eef1ff;border-color:#aab7ff;color:#4059d0}.urgency-chip input:focus-visible+span{outline:3px solid #cbd4ff;outline-offset:2px}.log-filter-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 0 12px;font-size:11px;color:var(--muted)}.pomo-log-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 13px}.pomo-stat{border:1px solid var(--line);background:#f9faff;border-radius:11px;padding:11px}.pomo-stat strong{display:block;font-size:18px;font-variant-numeric:tabular-nums}.pomo-stat span{font-size:10px;color:var(--muted)}.log-entry.pomo-focus{border-left-color:#6474db;background:#f8f9ff}.log-entry.pomo-break{border-left-color:#58a77b;background:#f7fcf8}.log-entry.pomo-long-break{border-left-color:#26734c;background:#f4faf6}.pomo-actions-row{display:flex;gap:8px;margin:15px 0}.pomo-actions-row button{flex:1}.log-entry{border:1px solid var(--line);border-left:4px solid #d9e0ec;border-radius:12px;padding:12px 13px;background:#fff}.log-entry.task{border-left-color:#7ba88d}.log-entry.pending{border-left-color:#d4a347;background:#fffdf8}.log-entry.adjustment{border-left-color:#8b72d6;background:#f8f6ff}.log-entry.task.completed{border-left-color:#4baf7b}.log-entry.task.not-completed{border-left-color:#c58a8a;background:#fffafa}.log-title{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.log-name{font-size:13px;font-weight:700;overflow-wrap:anywhere}.log-meta{font-size:11px;color:var(--muted);margin-top:3px}.coin-chip{font-size:11px;font-weight:800;padding:5px 8px;border-radius:8px;white-space:nowrap;background:#eef1f5;color:#758095}.coin-chip.positive{background:#e8f6ee;color:#218050}.coin-chip.negative{background:#fff0f0;color:#c84949}.coin-chip.manual{background:#eee9ff;color:#684fc0}.log-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.log-actions button{min-height:34px;padding:0 11px;font-size:11px;width:auto}.wallet-balance{font-size:30px;font-weight:800;letter-spacing:-.8px;font-variant-numeric:tabular-nums;color:#3d4e9f;margin:3px 0 14px}.wallet-balance small{font-size:13px;font-weight:650;letter-spacing:0;color:var(--muted)}.log-empty{border:1px dashed #dce3ee;border-radius:13px;padding:23px 14px;text-align:center;color:var(--muted);font-size:12px}.log-capacity-warning{border:1px solid #f0d7a3;background:#fff9eb;color:#8a641e;border-radius:10px;padding:10px 12px;font-size:11px;margin:0 0 10px}
+@media(max-width:760px){.wrap{padding:22px 13px 40px}.layout{grid-template-columns:1fr}.top{margin-bottom:18px}.panel{padding:18px}.status{font-size:10px}.pomo-clock{font-size:31px}.log-filter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pomo-log-stats{grid-template-columns:1fr 1fr}}
+
+.main-tabs{display:flex;gap:8px;padding:6px;background:#e9edf6;border:1px solid #e0e5ef;border-radius:14px;margin:0 0 18px}.main-tab{flex:1;border:0;border-radius:10px;background:transparent;color:#69758a;padding:11px 14px;font:inherit;font-size:13px;font-weight:750;cursor:pointer;transition:background .15s,color .15s,box-shadow .15s}.main-tab.active{background:#fff;color:#4059d0;box-shadow:0 2px 8px rgba(40,55,90,.08)}.main-tab-panel[hidden]{display:none}.scheduled-manager summary{display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;list-style:none}.scheduled-manager summary::-webkit-details-marker{display:none}.scheduled-manager summary strong,.scheduled-manager summary small{display:block}.scheduled-manager summary strong{font-size:15px}.scheduled-manager summary small{font-size:11px;font-weight:400;color:var(--muted);margin-top:3px}.manage-heading{font-size:12px;color:#68748b;margin:18px 0 8px}.shop-panel{text-align:center;max-width:680px;margin:20px auto;padding:44px 26px}.shop-icon{width:58px;height:58px;margin:0 auto 13px;border-radius:18px;background:#eef1ff;color:#5268db;display:grid;place-items:center;font-size:28px}.shop-panel h2{font-size:22px}.shop-balance{display:inline-block;margin:8px auto 22px;padding:9px 15px;border-radius:999px;background:#f0f3ff;color:#4059d0;font-weight:800}.shop-placeholder{max-width:440px;margin:0 auto;border:1px dashed #d9e0ef;border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:5px;color:#68748b;font-size:12px}.shop-placeholder strong{font-size:14px;color:#39445d}.shop-layout{display:grid;grid-template-columns:minmax(230px,.75fr) minmax(0,1.25fr);gap:18px;text-align:left;margin-top:16px}.shop-form-card,.shop-catalogue-card{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fff;min-width:0}.shop-form-card h3,.shop-catalogue-card h3{font-size:14px;margin:0 0 4px}.shop-form-card .sub,.shop-catalogue-card .sub{font-size:11px;margin:0 0 13px}.shop-items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.shop-item{border:1px solid var(--line);border-radius:13px;padding:13px;display:flex;flex-direction:column;min-width:0;background:#fff}.shop-item-top{display:flex;align-items:center;gap:10px;margin-bottom:9px}.shop-item-emoji{width:42px;height:42px;border-radius:12px;background:#f3f5ff;display:grid;place-items:center;font-size:24px;flex:none}.shop-item-label{font-size:13px;font-weight:750;overflow-wrap:anywhere}.shop-item-cost{font-size:11px;color:var(--muted);margin-top:2px}.shop-item-actions{display:flex;gap:7px;margin-top:auto;padding-top:10px}.shop-item-actions button{flex:1;min-height:34px;padding:0 9px;font-size:11px}.shop-item-actions .remove{flex:0 0 34px;width:34px}.shop-empty{grid-column:1/-1;border:1px dashed #d9e0ef;border-radius:13px;padding:24px;text-align:center;color:var(--muted);font-size:12px}.shop-item-count{font-size:11px;color:var(--muted);margin-bottom:10px}.shop-balance{font-size:14px;margin:0;white-space:nowrap}.log-entry.purchase{border-left-color:#d2a34d;background:#fffaf0}.shop-status{font-size:11px;color:var(--muted);margin-top:9px;min-height:16px}.logs-lower{margin-top:17px}
+
+@media(max-width:760px){.shop-layout{grid-template-columns:1fr}.shop-items{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:430px){.shop-items{grid-template-columns:1fr}.shop-panel{padding:18px}}
+.shop-item-actions button:disabled{opacity:.45;cursor:not-allowed}
+.log-load-state{min-height:20px;margin:10px 0 2px;text-align:center;color:var(--muted);font-size:11px}.log-load-state button{margin-left:8px;border:0;background:none;color:var(--accent);font:inherit;font-weight:750;cursor:pointer}.log-more-button{width:100%;min-height:38px;margin-top:8px;border:1px solid var(--line);border-radius:10px;background:#f8f9ff;color:var(--accent);font:inherit;font-size:12px;font-weight:750;cursor:pointer}.log-more-button:hover{background:#eef1ff}</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><div class="logo">✓</div><div><h1>Daylight</h1><p>Your plans, directly over Bluetooth</p></div></div>
+    <div class="top-actions"><div class="status"><span id="dot" class="dot"></span><span id="connection">Bluetooth not connected</span></div><button class="secondary connect-button" id="bleConnectButton" type="button">Connect Bluetooth</button></div>
+  </header>
+  <nav class="main-tabs" role="tablist" aria-label="Main sections">
+    <button class="main-tab active" id="mainAddTab" type="button" role="tab" aria-selected="true" aria-controls="mainAddPane">Add events</button>
+    <button class="main-tab" id="mainLogsTab" type="button" role="tab" aria-selected="false" aria-controls="mainLogsPane">Logs</button>
+    <button class="main-tab" id="mainShopTab" type="button" role="tab" aria-selected="false" aria-controls="mainShopPane">Shop</button>
+  </nav>
+  <main>
+    <section class="main-tab-panel" id="mainAddPane" role="tabpanel" aria-labelledby="mainAddTab">
+      <div class="layout">
+        <div>
+          <section class="panel">
+            <h2>Add an event</h2><p class="sub">Plan a task or block out a period of time.</p>
+            <form id="eventForm">
+              <div class="field"><label for="name">EVENT NAME</label><input id="name" maxlength="64" placeholder="e.g. Study chemistry" required></div>
+              <div class="row"><div class="field"><label for="date">START DATE</label><input id="date" type="date" required></div><div class="field"><label for="time">START TIME</label><input id="time" type="time" required></div></div>
+              <label class="checkrow"><input id="durationEnabled" type="checkbox"> This event has an end time</label>
+              <div class="end-fields" id="endFields"><div class="row"><div class="field"><label for="endDate">END DATE</label><input id="endDate" type="date"></div><div class="field"><label for="endTime">END TIME</label><input id="endTime" type="time"></div></div></div>
+              <div class="field"><label for="urgency">URGENCY</label><select id="urgency"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select></div>
+              <button class="primary" id="addButton" type="submit">＋ Add event</button>
+              <p class="hint">Events are saved on the ESP32 and remain after a restart. Connect over Bluetooth to sync.</p>
+            </form>
+          </section>
+          <section class="panel">
+            <h2>Add a repeating activity</h2><p class="sub">Automatically schedule the same activity on selected days.</p>
+            <form id="repeatForm">
+              <div class="field"><label for="repeatName">ACTIVITY NAME</label><input id="repeatName" maxlength="64" placeholder="e.g. Homework" required></div>
+              <div class="row"><div class="field"><label for="repeatTime">START TIME</label><input id="repeatTime" type="time" required></div><div class="field"><label for="repeatEndTime">END TIME (OPTIONAL)</label><input id="repeatEndTime" type="time"></div></div>
+              <div class="field"><label>REPEAT ON</label></div>
+              <div class="days-grid" aria-label="Days of the week">
+                <label class="day-chip"><input type="checkbox" id="repeatDay0" value="0">Sun</label><label class="day-chip"><input type="checkbox" id="repeatDay1" value="1" checked>Mon</label><label class="day-chip"><input type="checkbox" id="repeatDay2" value="2" checked>Tue</label><label class="day-chip"><input type="checkbox" id="repeatDay3" value="3" checked>Wed</label><label class="day-chip"><input type="checkbox" id="repeatDay4" value="4" checked>Thu</label><label class="day-chip"><input type="checkbox" id="repeatDay5" value="5" checked>Fri</label><label class="day-chip"><input type="checkbox" id="repeatDay6" value="6">Sat</label>
+              </div>
+              <div class="field"><label for="repeatUrgency">URGENCY</label><select id="repeatUrgency"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select></div>
+              <button class="primary" id="repeatAddButton" type="submit">＋ Add repeating activity</button>
+              <p class="hint">Repeats on each selected weekday until removed. An optional end time must be later on the same day.</p>
+            </form>
+          </section>
+          <section class="panel">
+            <h2>Display dimming</h2><p class="sub">Choose when the screen should dim automatically.</p>
+            <form id="settingsForm">
+              <label class="switchline"><span>Enable night dimming</span><input id="nightEnabled" type="checkbox" checked></label>
+              <div class="setting-grid"><div class="field"><label for="nightStart">DIM FROM</label><input id="nightStart" type="time" required></div><div class="field"><label for="nightEnd">RESTORE AT</label><input id="nightEnd" type="time" required></div></div>
+              <div class="field"><label for="nightBrightness">NIGHT BRIGHTNESS</label><div class="range-line"><input id="nightBrightness" type="range" min="0" max="100"><span class="range-value" id="nightBrightnessValue"></span></div></div>
+              <label class="switchline"><span>Enable red night tint</span><input id="nightRedTintEnabled" type="checkbox"></label>
+              <div class="field"><label for="nightRedTintPercent">RED TINT STRENGTH</label><div class="range-line"><input id="nightRedTintPercent" type="range" min="0" max="100"><span class="range-value" id="nightRedTintPercentValue"></span></div><p class="hint">A translucent red overlay is applied only during the night-dimming window. 0% disables the tint; 100% is fully red.</p></div>
+              <div class="field"><label for="dayBrightness">DAY BRIGHTNESS</label><div class="range-line"><input id="dayBrightness" type="range" min="1" max="100"><span class="range-value" id="dayBrightnessValue"></span></div></div>
+              <button class="primary" type="submit">Save display settings</button>
+              <p class="hint" id="brightnessHint">The schedule uses Saudi Arabia time (UTC+3).</p>
+            </form>
+          </section>
+        </div>
+        <div>
+          <details class="panel scheduled-manager" id="scheduledManager">
+            <summary><span><strong>Manage scheduled activities</strong><small>Remove events or repeating rules you've added.</small></span><span class="count" id="count">0 events</span></summary>
+            <div class="toolbar" style="margin-top:15px"><a class="text-link" href="/api/export.csv">↓ Export events and repeating activities as CSV</a></div>
+            <h3 class="manage-heading">One-time events</h3>
+            <div class="events" id="events"><div class="empty">Loading scheduled events…</div></div>
+            <h3 class="manage-heading">Repeating activities <span class="count" id="repeatCount">0 rules</span></h3>
+            <div class="events" id="repeatingActivities"><div class="empty">Loading repeating activities…</div></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="main-tab-panel" id="mainLogsPane" role="tabpanel" aria-labelledby="mainLogsTab" hidden>
+      <section class="panel">
+        <div class="panel-head"><div><h2>Activity history</h2><p class="sub" style="margin:4px 0 0">Review task rewards, coin adjustments and Pomodoro time.</p></div><span class="count" id="logCount">0 entries</span></div>
+        <div class="log-tabs" role="tablist" aria-label="Activity history tabs"><button class="log-tab active" id="taskLogTab" type="button" role="tab" aria-selected="true">Tasks &amp; coins</button><button class="log-tab" id="pomodoroLogTab" type="button" role="tab" aria-selected="false">Pomodoro</button></div>
+        <div id="taskLogPane">
+          <div class="log-filter-grid">
+            <div class="field urgency-filter-field"><div class="filter-title">URGENCY</div><div class="urgency-options" role="group" aria-label="Filter tasks by one or more urgency levels"><label class="urgency-chip"><input type="checkbox" id="logUrgencyAll" checked><span>All</span></label><label class="urgency-chip"><input type="checkbox" id="logUrgencyLow" checked><span>Low</span></label><label class="urgency-chip"><input type="checkbox" id="logUrgencyMedium" checked><span>Medium</span></label><label class="urgency-chip"><input type="checkbox" id="logUrgencyHigh" checked><span>High</span></label></div></div>
+            <div class="field"><label for="logSource">ENTRY TYPE</label><select id="logSource"><option value="all">All entries</option><option value="automatic">Automatic task rewards</option><option value="manual">Manual coin changes</option><option value="shop">Shop purchases</option></select></div>
+            <div class="field"><label for="logStatus">TASK STATUS</label><select id="logStatus"><option value="all">All statuses</option><option value="pending">Awaiting answer</option><option value="completed">Completed</option><option value="not_completed">Not completed</option></select></div>
+            <div class="field"><label for="logFrom">FROM DATE</label><input id="logFrom" type="date"></div><div class="field"><label for="logTo">TO DATE</label><input id="logTo" type="date"></div><div class="field"><label for="logSort">SORT BY</label><select id="logSort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="coins-desc">Most coins first</option><option value="coins-asc">Fewest coins first</option><option value="name-asc">Name A–Z</option><option value="name-desc">Name Z–A</option></select></div>
+            <div class="field" style="grid-column:1/-1"><label for="logSearch">SEARCH TASK NAME OR REASON</label><input id="logSearch" type="search" placeholder="Search your history…"></div>
+          </div>
+          <div class="log-filter-meta"><span id="logFilteredCount">Showing all entries</span><button class="text-link" id="clearLogFilters" type="button" style="border:0;background:none;cursor:pointer;padding:0">Clear filters</button></div>
+          <div class="toolbar"><a class="text-link" href="/api/rewards.csv">↓ Export complete reward log as CSV</a></div>
+          <div class="log-list" id="rewardLog"><div class="log-empty">Open Logs to load your reward history.</div></div>
+          <div class="log-load-state" id="logLoadState" role="status"></div>
+        </div>
+        <div id="pomodoroLogPane" hidden>
+          <div class="pomo-log-stats"><div class="pomo-stat"><strong id="pomoStudyTotal">0m</strong><span>Time studying</span></div><div class="pomo-stat"><strong id="pomoBreakTotal">0m</strong><span>Time on breaks</span></div><div class="pomo-stat"><strong id="pomoCoinsTotal">0</strong><span>Coins earned</span></div></div>
+          <div class="toolbar"><a class="text-link" href="/api/pomodoro.csv">↓ Export Pomodoro log as CSV</a></div>
+          <div class="log-list" id="pomodoroLog"><div class="log-empty">Open Logs to load Pomodoro history.</div></div>
+          <div class="log-load-state" id="pomodoroLoadState" role="status"></div>
+        </div>
+      </section>
+      <div class="layout logs-lower">
+        <div>
+          <section class="panel"><div class="panel-head"><div><h2>Rewards wallet</h2><p class="sub" style="margin:4px 0 0">Earn coins and make documented adjustments.</p></div></div><div class="wallet-balance" id="coinBalance">0 <small>coins</small></div><form id="coinForm"><div class="row"><div class="field"><label for="coinAction">ADJUSTMENT</label><select id="coinAction"><option value="add">Add coins</option><option value="remove">Remove coins</option></select></div><div class="field"><label for="coinAmount">AMOUNT</label><input id="coinAmount" type="number" min="1" max="100000" value="10" required></div></div><div class="field"><label for="coinReason">REASON</label><input id="coinReason" maxlength="100" placeholder="e.g. Bonus for helping at home" required></div><button class="secondary" id="coinSubmit" type="submit">Record coin adjustment</button><p class="hint">Coin removals cannot exceed the current balance. Every adjustment is saved in the log.</p></form></section>
+        </div>
+        <div>
+          <section class="panel"><div class="pomo-top"><div><h2>Pomodoro timer</h2><p class="sub" style="margin:4px 0 0">Focus sessions with automatic breaks.</p></div><div style="text-align:right"><div class="pomo-clock" id="pomoClock">25:00</div><div class="pomo-stage" id="pomoStage">Idle</div></div></div><div class="pomo-actions"><button class="primary" id="pomoStart" type="button">Start</button><button class="secondary" id="pomoPause" type="button">Pause</button><button class="secondary" id="pomoSkip" type="button" disabled>Skip to break</button><button class="secondary" id="pomoReset" type="button">Reset</button></div><div class="sessions" id="pomoSessions">0 focus sessions counted</div><details style="margin-top:15px"><summary style="font-size:12px;color:#59657c;cursor:pointer;font-weight:700">Timer settings</summary><form id="pomoSettingsForm" style="margin-top:13px"><div class="setting-grid"><div class="field"><label for="focusMinutes">FOCUS (MIN)</label><input id="focusMinutes" type="number" min="1" max="180" required></div><div class="field"><label for="shortBreakMinutes">SHORT BREAK (MIN)</label><input id="shortBreakMinutes" type="number" min="1" max="60" required></div><div class="field"><label for="longBreakMinutes">LONG BREAK (MIN)</label><input id="longBreakMinutes" type="number" min="1" max="90" required></div><div class="field"><label for="longBreakEvery">LONG BREAK EVERY</label><input id="longBreakEvery" type="number" min="2" max="12" required></div></div><button class="secondary" type="submit">Save timer settings</button></form></details></section>
+        </div>
+      </div>
+    </section>
+
+    <section class="main-tab-panel" id="mainShopPane" role="tabpanel" aria-labelledby="mainShopTab" hidden>
+      <section class="panel">
+        <div class="panel-head"><div><h2>Reward shop</h2><p class="sub" style="margin:4px 0 0">Create rewards and exchange your earned coins.</p></div><div class="shop-balance" id="shopCoinBalance">0 coins available</div></div>
+        <div class="shop-layout">
+          <section class="shop-form-card">
+            <h3>Add a shop item</h3><p class="sub">Give each reward a name, emoji and coin price.</p>
+            <form id="shopItemForm">
+              <div class="field"><label for="shopItemLabel">ITEM LABEL</label><input id="shopItemLabel" maxlength="40" placeholder="e.g. 30 minutes of gaming" required></div>
+              <div class="row"><div class="field"><label for="shopItemIcon">EMOJI ICON</label><input id="shopItemIcon" maxlength="8" placeholder="🎮" required></div><div class="field"><label for="shopItemCost">VALUE (COINS)</label><input id="shopItemCost" type="number" min="1" max="100000" value="50" required></div></div>
+              <button class="primary" id="shopItemSubmit" type="submit">＋ Add item</button>
+              <p class="hint">Items are saved on the ESP32. Removing an item won't erase previous purchases from the logs.</p>
+              <div class="shop-status" id="shopStatus" role="status"></div>
+            </form>
+          </section>
+          <section class="shop-catalogue-card">
+            <div class="panel-head"><div><h3>Available rewards</h3><p class="sub" style="margin:4px 0 0">Choose an item to spend your coins.</p></div><span class="count" id="shopItemCount">0 items</span></div>
+            <div class="shop-items" id="shopItems"><div class="shop-empty">Loading the reward shop…</div></div>
+          </section>
+        </div>
+      </section>
+    </section>
+  </main>
+  <div class="foot">Daylight · Offline-capable Bluetooth dashboard</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const $=id=>document.getElementById(id);let toastTimer;let rewardEntries=[];let rewardCapacity=500;
+let rewardSummary=null,rewardSnapshot=0,rewardNextOffset=0,rewardHasMore=false;
+let rewardLoadGeneration=0,rewardInitialBusy=false,rewardPageBusy=false,rewardReloadRequested=false;
+let lastLogRevision=null,logMetaRequestBusy=false;
+let taskLogVisibleLimit=100,pomoLogVisibleLimit=100;
+let currentMainTab='add',currentLogTab='tasks';
+let pomoDisplayState=null,pomoDisplaySyncedAt=0,lastPomodoroStageSequence=null,pomoZeroSyncRequested=false;
+let pomoSettingsDirty=false;let pomoSettingsEditing=false;const pendingPurchaseKeys=new Map();
+function applyPomodoroSettingsToForm(p){
+  $('focusMinutes').value=p.focusMinutes;
+  $('shortBreakMinutes').value=p.shortBreakMinutes;
+  $('longBreakMinutes').value=p.longBreakMinutes;
+  $('longBreakEvery').value=p.longBreakEvery;
+}
+function toast(message){$('toast').textContent=message;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),2600)}
+function esc(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+// The ESP32 exposes its application API through a BLE GATT request/response
+// bridge. The cached HTTPS PWA is the UI; all task/shop/log data remains on the ESP32.
+const BLE_SERVICE_UUID='7d2ea28a-f7bd-485a-bd9d-92ad6ecfe93e';
+const BLE_RX_UUID='7d2ea28b-f7bd-485a-bd9d-92ad6ecfe93e';
+const BLE_TX_UUID='7d2ea28c-f7bd-485a-bd9d-92ad6ecfe93e';
+const BLE_RX_MAGIC=0xD1,BLE_TX_MAGIC=0xD2,BLE_HEADER_BYTES=5;
+let bleDevice=null,bleGatt=null,bleRxCharacteristic=null,bleTxCharacteristic=null;
+let bleConnected=false,blePendingResponse=null,bleResponseParts=[],bleExpectedResponseSequence=0;
+let blePreferredWriteSize=200,dashboardLoaded=false;
+
+function setBleConnectionState(connected,message){
+  bleConnected=connected;
+  $('dot').classList.toggle('online',connected);
+  $('connection').textContent=message;
+  $('bleConnectButton').textContent=connected?'Connected · Disconnect':'Connect Bluetooth';
+  $('bleConnectButton').classList.toggle('connected',connected);
+  document.querySelectorAll('.main-tab').forEach(tab=>tab.disabled=!connected);
+  if(!connected){dashboardLoaded=false;if(blePendingResponse){blePendingResponse.reject(Error('Bluetooth connection was lost.'));blePendingResponse=null}}
+}
+function onBleNotification(event){
+  if(!blePendingResponse)return;
+  const view=event.target.value;
+  const bytes=new Uint8Array(view.buffer,view.byteOffset,view.byteLength);
+  if(bytes.length<BLE_HEADER_BYTES||bytes[0]!==BLE_TX_MAGIC)return;
+  const sequence=bytes[1]|(bytes[2]<<8),flags=bytes[3],payloadLength=bytes[4];
+  if(payloadLength>bytes.length-BLE_HEADER_BYTES){blePendingResponse.reject(Error('Invalid BLE response frame.'));blePendingResponse=null;return}
+  if(sequence===0){bleResponseParts=[];bleExpectedResponseSequence=0}
+  if(sequence!==bleExpectedResponseSequence){blePendingResponse.reject(Error('BLE response arrived out of order. Please reconnect and try again.'));blePendingResponse=null;return}
+  bleResponseParts.push(bytes.slice(BLE_HEADER_BYTES,BLE_HEADER_BYTES+payloadLength));
+  bleExpectedResponseSequence++;
+  if(flags&1){
+    const total=bleResponseParts.reduce((n,p)=>n+p.length,0),payload=new Uint8Array(total);let offset=0;
+    for(const part of bleResponseParts){payload.set(part,offset);offset+=part.length}
+    const pending=blePendingResponse;blePendingResponse=null;pending.resolve(payload);
+  }
+}
+function buildBleFrame(sequence,final,payload,frameSize,actualLength){
+  const frame=new Uint8Array(frameSize);frame[0]=BLE_RX_MAGIC;frame[1]=sequence&255;frame[2]=(sequence>>8)&255;
+  frame[3]=final?1:0;frame[4]=actualLength;frame.set(payload, BLE_HEADER_BYTES);return frame;
+}
+async function writeBleMessage(bytes,frameSize){
+  const maxPayload=frameSize-BLE_HEADER_BYTES;let offset=0,sequence=0;
+  do{
+    const length=Math.min(maxPayload,bytes.length-offset),chunk=bytes.slice(offset,offset+length);
+    const frame=buildBleFrame(sequence,offset+length>=bytes.length,chunk,frameSize,length);
+    if(bleRxCharacteristic.writeValueWithResponse)await bleRxCharacteristic.writeValueWithResponse(frame);
+    else await bleRxCharacteristic.writeValue(frame);
+    offset+=length;sequence++;
+  }while(offset<bytes.length);
+}
+async function performBleRequest(task){
+  if(!bleConnected||!bleRxCharacteristic||!bleTxCharacteristic)throw Error('Connect to Daylight over Bluetooth first.');
+  const envelope=JSON.stringify({method:task.method,url:task.url,body:task.options.body||''});
+  const encoded=new TextEncoder().encode(envelope);
+  if(encoded.length>4096)throw Error('This request is too large for the BLE connection.');
+  const responsePromise=new Promise((resolve,reject)=>{
+    const timeout=setTimeout(()=>{if(blePendingResponse){blePendingResponse=null;reject(Error('Daylight did not respond over Bluetooth. Move closer and try again.'))}},45000);
+    blePendingResponse={resolve:value=>{clearTimeout(timeout);resolve(value)},reject:error=>{clearTimeout(timeout);reject(error)}};
+  });
+  try{
+    try{await writeBleMessage(encoded,blePreferredWriteSize)}
+    catch(firstError){
+      // Some centrals negotiate only the default 23-byte ATT MTU (20-byte value).
+      // Sequence zero resets an incomplete request, so retrying at 20 bytes is safe.
+      if(blePreferredWriteSize===20)throw firstError;
+      blePreferredWriteSize=20;await writeBleMessage(encoded,20);
+    }
+    const payload=await responsePromise;
+    if(payload.length<3)throw Error('Daylight returned an incomplete BLE response.');
+    const status=payload[0]|(payload[1]<<8),contentType=payload[2];
+    const raw=new TextDecoder().decode(payload.subarray(3));
+    let data=raw;
+    if(contentType===0&&raw){try{data=JSON.parse(raw)}catch(e){throw Error('Daylight sent invalid JSON over Bluetooth.')}}
+    if(status<200||status>=300){throw Error((data&&data.error)||`Daylight request failed (${status}).`)}
+    return data;
+  }catch(error){
+    if(blePendingResponse){blePendingResponse.reject(error);blePendingResponse=null}
+    throw error;
+  }
+}
+
+const apiQueue=[];let apiRunning=false,apiSequence=0;const apiGetInflight=new Map();
+function api(url,options={}){
+  const method=String(options.method||'GET').toUpperCase();
+  if(method==='GET'&&apiGetInflight.has(url))return apiGetInflight.get(url);
+  const priority=Number.isFinite(options.priority)?options.priority:(method==='GET'?1:0);
+  const requestOptions={...options};delete requestOptions.priority;delete requestOptions.responseType;
+  let resolveRequest,rejectRequest;
+  const requestPromise=new Promise((resolve,reject)=>{resolveRequest=resolve;rejectRequest=reject});
+  const task={url,method,priority,sequence:apiSequence++,options:requestOptions,resolve:resolveRequest,reject:rejectRequest};
+  apiQueue.push(task);apiQueue.sort((a,b)=>a.priority-b.priority||a.sequence-b.sequence);
+  let returned=requestPromise;
+  if(method==='GET'){returned=requestPromise.finally(()=>{if(apiGetInflight.get(url)===returned)apiGetInflight.delete(url)});apiGetInflight.set(url,returned)}
+  pumpApiQueue();return returned;
+}
+function pumpApiQueue(){
+  if(apiRunning||!apiQueue.length)return;
+  apiRunning=true;const task=apiQueue.shift();
+  performBleRequest(task).then(task.resolve,task.reject).finally(()=>{apiRunning=false;pumpApiQueue()});
+}
+
+// BLE cannot provide a browser download URL. Fetch CSV through GATT and create
+// a local download in the web app instead.
+async function downloadPagedCsv(basePath, total, fileName, link){
+  const pageSize=30,parts=[];let offset=0,firstRequest=true;
+  do{
+    const csv=await api(`${basePath}?offset=${offset}&limit=${pageSize}`,{priority:0});
+    if(typeof csv!=='string')throw Error('The ESP32 returned an invalid CSV page.');
+    if(csv)parts.push(csv);
+    const rows=csv.split('\r\n').filter(Boolean).length-(firstRequest&&csv?1:0);
+    firstRequest=false;
+    if(rows<=0)break;
+    offset+=rows;
+    if(offset<total)link.textContent=`Preparing export… ${Math.min(offset,total)}/${total}`;
+    if(rows<pageSize)break;
+  }while(offset<total);
+  const blob=new Blob([parts.join('')],{type:'text/csv;charset=utf-8'});
+  const objectUrl=URL.createObjectURL(blob),a=document.createElement('a');a.href=objectUrl;a.download=fileName;
+  document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(objectUrl),1000);
+}
+document.querySelectorAll('a[href^="/api/"]').forEach(link=>link.addEventListener('click',async event=>{
+  event.preventDefault();const path=link.getAttribute('href'),original=link.textContent;link.textContent='Preparing export…';
+  try{
+    const meta=await api('/api/logs/meta',{priority:0});
+    let total=0,fileName='daylight-export.csv';
+    if(path==='/api/export.csv'){total=Number(meta.eventCount)||0;fileName='daylight-events.csv'}
+    else if(path==='/api/rewards.csv'){total=Number(meta.entryCount)||0;fileName='daylight-reward-log.csv'}
+    else if(path==='/api/pomodoro.csv'){total=Number(meta.pomodoroEntryCount)||0;fileName='daylight-pomodoro-log.csv'}
+    await downloadPagedCsv(path,total,fileName,link);toast('CSV export ready');
+  }catch(err){toast(err.message)}finally{link.textContent=original}
+}));
+
+async function connectBle(){
+  if(!navigator.bluetooth){toast('Bluetooth web access requires Chrome or Edge and a secure HTTPS app. Firefox and Safari are not supported.');return}
+  if(bleConnected&&bleDevice){bleDevice.gatt.disconnect();return}
+  const button=$('bleConnectButton');button.disabled=true;button.textContent='Finding Daylight…';
+  try{
+    bleDevice=await navigator.bluetooth.requestDevice({filters:[{services:[BLE_SERVICE_UUID]}]});
+    bleDevice.addEventListener('gattserverdisconnected',()=>setBleConnectionState(false,'Bluetooth disconnected'));
+    bleGatt=await bleDevice.gatt.connect();
+    const service=await bleGatt.getPrimaryService(BLE_SERVICE_UUID);
+    bleRxCharacteristic=await service.getCharacteristic(BLE_RX_UUID);
+    bleTxCharacteristic=await service.getCharacteristic(BLE_TX_UUID);
+    await bleTxCharacteristic.startNotifications();
+    bleTxCharacteristic.addEventListener('characteristicvaluechanged',onBleNotification);
+    setBleConnectionState(true,`Connected · ${bleDevice.name||'Daylight'}`);
+    blePreferredWriteSize=200;
+    if(!dashboardLoaded)await initialiseDashboardAfterBle();
+    toast('Connected to Daylight over Bluetooth');
+  }catch(error){
+    setBleConnectionState(false,'Bluetooth not connected');
+    toast(error.message||'Could not connect to Daylight.');
+  }finally{button.disabled=false}
+}
+$('bleConnectButton').addEventListener('click',connectBle);
+
+function prettyDate(s){const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d).toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short',year:'numeric'})}
+function renderEvents(items){items.sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));$('count').textContent=`${items.length} ${items.length===1?'event':'events'}`;if(!items.length){$('events').innerHTML='<div class="empty">Nothing planned yet. Add an event to get started.</div>';return}const html=items.map(e=>{const range=e.endDate&&e.endTime?`${prettyDate(e.date)} · ${esc(e.time)} – ${prettyDate(e.endDate)} · ${esc(e.endTime)}`:`${prettyDate(e.date)} · ${esc(e.time)}`;return `<article class="event"><div><div class="event-name">${esc(e.name)}<span class="tag ${esc(e.urgency)}">${esc(e.urgency)}</span></div><div class="event-meta">${range}</div></div><button class="remove" title="Remove event" aria-label="Remove ${esc(e.name)}" data-id="${e.id}">×</button></article>`}).join('');$('events').innerHTML=html;$('events').querySelectorAll('.remove').forEach(btn=>btn.addEventListener('click',()=>removeEvent(btn.dataset.id)))}
+function renderRepeats(items){$('repeatCount').textContent=`${items.length} ${items.length===1?'rule':'rules'}`;if(!items.length){$('repeatingActivities').innerHTML='<div class="empty">No repeating activities yet. Add one to build your routine.</div>';return}const html=items.map(a=>{const range=a.endTime?`${esc(a.time)} – ${esc(a.endTime)}`:esc(a.time);return `<article class="event"><div><div class="event-name">${esc(a.name)}<span class="tag ${esc(a.urgency)}">${esc(a.urgency)}</span></div><div class="event-meta">${esc(a.daysLabel)} · ${range}</div></div><button class="remove" title="Remove repeating activity" aria-label="Remove ${esc(a.name)}" data-id="${a.id}">×</button></article>`}).join('');$('repeatingActivities').innerHTML=html;$('repeatingActivities').querySelectorAll('.remove').forEach(btn=>btn.addEventListener('click',()=>removeRepeating(btn.dataset.id)))}
+function renderShop(data){
+  const balance=Number(data.balance||0);
+  $('shopCoinBalance').textContent=data.ledgerHealthy===false?'Balance unavailable':`${balance.toLocaleString()} coins available`;
+  const items=Array.isArray(data.items)?data.items:[];
+  $('shopItemCount').textContent=`${items.length} ${items.length===1?'item':'items'}`;
+  const formDisabled=!data.storageReady||!data.shopStorageHealthy||items.length>=Number(data.maxItems||32);
+  $('shopItemSubmit').disabled=formDisabled;
+  $('shopStatus').textContent=!data.storageReady?'LittleFS is unavailable. Shop changes are disabled.':!data.shopStorageHealthy?'Shop storage could not be recovered. Item changes are disabled.':items.length>=Number(data.maxItems||32)?'The shop is full. Increase MAX_SHOP_ITEMS in project_config.h.':'';
+  if(data.ledgerHealthy===false){$('shopStatus').textContent='The coin ledger is unavailable. Purchases are disabled to protect your balance.'}
+  else if(data.ledgerFull){$('shopStatus').textContent='The activity log is full. Export your logs and increase MAX_TASK_LOG_ENTRIES in project_config.h before purchasing.'}
+  if(!items.length){$('shopItems').innerHTML='<div class="shop-empty">No rewards yet. Add the first item using the form.</div>';return}
+  const html=items.map(item=>{
+    const cost=Number(item.cost)||0;
+    const affordable=balance>=cost&&!!data.canPurchase;
+    const disabled=!affordable?'disabled':'';
+    const title=!data.canPurchase?'Purchases unavailable':balance<cost?'Not enough coins':'Redeem this reward';
+    return `<article class="shop-item"><div class="shop-item-top"><div class="shop-item-emoji" aria-hidden="true">${esc(item.icon)}</div><div><div class="shop-item-label">${esc(item.label)}</div><div class="shop-item-cost">${cost.toLocaleString()} coins</div></div></div><div class="shop-item-actions"><button class="secondary shop-buy" type="button" data-id="${item.id}" ${disabled} title="${esc(title)}">Redeem</button><button class="remove shop-remove" type="button" data-id="${item.id}" aria-label="Remove ${esc(item.label)}" title="Remove item">×</button></div></article>`;
+  }).join('');
+  $('shopItems').innerHTML=html;
+  $('shopItems').querySelectorAll('.shop-buy').forEach(button=>button.addEventListener('click',()=>purchaseShopItem(button.dataset.id,button)));
+  $('shopItems').querySelectorAll('.shop-remove').forEach(button=>button.addEventListener('click',()=>removeShopItem(button.dataset.id,button)));
+}
+async function refreshShop(priority=1){try{const data=await api('/api/shop',{priority});renderShop(data)}catch(e){$('shopItems').innerHTML='<div class="shop-empty">Could not load the reward shop. Check the ESP32 connection.</div>'}}
+async function purchaseShopItem(id,button){
+  const itemId=Number(id);if(!Number.isFinite(itemId)||itemId<=0)return;
+  const item=button.closest('.shop-item');
+  const label=item?.querySelector('.shop-item-label')?.textContent||'this reward';
+  const costText=item?.querySelector('.shop-item-cost')?.textContent||'';
+  if(!window.confirm(`Redeem ${label} for ${costText}?`))return;
+  button.disabled=true;
+  let requestKey=pendingPurchaseKeys.get(itemId);
+  if(!requestKey){requestKey=`${Date.now().toString(36)}-${Math.random().toString(36).slice(2,12)}`;pendingPurchaseKeys.set(itemId,requestKey)}
+  try{
+    const result=await api('/api/shop/purchase',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:itemId,requestKey})});
+    pendingPurchaseKeys.delete(itemId);
+    if(result.balance!==undefined){$('shopCoinBalance').textContent=`${Number(result.balance).toLocaleString()} coins available`;$('coinBalance').innerHTML=`${Number(result.balance).toLocaleString()} <small>coins</small>`}
+    toast(`${result.alreadyProcessed?'Purchase confirmed':'Purchased'} ${result.itemLabel||label} · ${Math.abs(Number(result.coinDelta)||0)} coins spent`);
+    button.disabled=false;
+    refreshShop(2);
+  }catch(e){toast(e.message);button.disabled=false;refreshShop(2)}
+}
+async function removeShopItem(id,button){
+  const item=button.closest('.shop-item');
+  const label=item?.querySelector('.shop-item-label')?.textContent||'this item';
+  if(!window.confirm(`Remove ${label} from the shop? Previous purchases will remain in the logs.`))return;
+  button.disabled=true;
+  try{await api('/api/shop/items?id='+encodeURIComponent(id),{method:'DELETE'});toast('Shop item removed');item?.remove();refreshShop(2)}
+  catch(e){toast(e.message);button.disabled=false}
+}
+$('shopItemForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const button=$('shopItemSubmit');button.disabled=true;
+  try{
+    const payload={label:$('shopItemLabel').value.trim(),icon:$('shopItemIcon').value.trim(),cost:Number($('shopItemCost').value)};
+    await api('/api/shop/items',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    $('shopItemLabel').value='';$('shopItemIcon').value='';$('shopItemCost').value='50';
+    toast('Shop item added');refreshShop(2);
+  }catch(err){toast(err.message)}finally{button.disabled=false}
+});
+function formatDuration(seconds){seconds=Math.max(0,Number(seconds)||0);const h=Math.floor(seconds/3600),m=Math.floor((seconds%3600)/60),s=seconds%60;if(h)return `${h}h ${m}m`;if(m)return `${m}m${s?' '+s+'s':''}`;return `${s}s`}
+function renderFilteredTaskLog(){
+  const selectedUrgencies=['low','medium','high'].filter(level=>$('logUrgency'+level[0].toUpperCase()+level.slice(1)).checked);
+  const allUrgencies=selectedUrgencies.length===3;
+  const source=$('logSource').value,status=$('logStatus').value;
+  const from=$('logFrom').value,to=$('logTo').value,query=$('logSearch').value.trim().toLocaleLowerCase(),sort=$('logSort').value;
+  let list=rewardEntries.filter(entry=>entry.kind==='task'||entry.kind==='adjustment'||entry.kind==='purchase');
+  if(source==='automatic')list=list.filter(entry=>entry.kind==='task');
+  if(source==='manual')list=list.filter(entry=>entry.kind==='adjustment');
+  if(source==='shop')list=list.filter(entry=>entry.kind==='purchase');
+  if(!allUrgencies)list=list.filter(entry=>entry.kind!=='task'||selectedUrgencies.includes(entry.urgency));
+  if(status!=='all')list=list.filter(entry=>entry.kind==='task'&&entry.status===status);
+  if(from)list=list.filter(entry=>(entry.endDate||entry.date||'')>=from);
+  if(to)list=list.filter(entry=>(entry.date||'')<=to);
+  if(query)list=list.filter(entry=>`${entry.name||''} ${entry.reason||''}`.toLocaleLowerCase().includes(query));
+  const dateKey=e=>`${e.date||''} ${e.time||''}`;
+  if(sort==='oldest')list.sort((a,b)=>dateKey(a).localeCompare(dateKey(b)));
+  else if(sort==='coins-desc')list.sort((a,b)=>(Number(b.coinDelta)||0)-(Number(a.coinDelta)||0)||dateKey(b).localeCompare(dateKey(a)));
+  else if(sort==='coins-asc')list.sort((a,b)=>(Number(a.coinDelta)||0)-(Number(b.coinDelta)||0)||dateKey(b).localeCompare(dateKey(a)));
+  else if(sort==='name-asc')list.sort((a,b)=>(a.name||'').localeCompare(b.name||''));
+  else if(sort==='name-desc')list.sort((a,b)=>(b.name||'').localeCompare(a.name||''));
+  else list.sort((a,b)=>dateKey(b).localeCompare(dateKey(a)));
+  const taskEntryTotal=rewardSummary?Number(rewardSummary.taskEntryCount||0):rewardEntries.filter(e=>e.kind==='task'||e.kind==='adjustment'||e.kind==='purchase').length;
+  const loadedHint=rewardHasMore?` · loaded ${rewardEntries.length}/${rewardSnapshot}`:'';
+  $('logFilteredCount').textContent=`${list.length} matching entries in loaded history · ${taskEntryTotal} total task/coin/shop entries${loadedHint}`;
+  const nearCapacity=rewardEntries.length>=Math.ceil(rewardCapacity*0.9);
+  const capacityNotice=nearCapacity?'<div class="log-capacity-warning">The reward/activity ledger is nearly full. Export the logs and increase MAX_TASK_LOG_ENTRIES in project_config.h before more entries are recorded.</div>':'';
+  if(!list.length){$('rewardLog').innerHTML=capacityNotice+`<div class="log-empty">${rewardHasMore?'No matching entries in the loaded portion yet. Older history is still loading.':'No entries match these filters.'}</div>`;return}
+  const visibleList=list.slice(0,taskLogVisibleLimit);
+  const html=visibleList.map(entry=>{
+    const date=entry.date?prettyDate(entry.date):'Date unavailable';
+    const time=entry.time?` · ${esc(entry.time)}`:'';
+    if(entry.kind==='purchase'){
+      const spent=Math.abs(Number(entry.coinDelta)||0);
+      return `<article class="log-entry purchase"><div class="log-title"><div><div class="log-name">${esc(entry.icon||'🛍️')} ${esc(entry.name)}</div><div class="log-meta">Purchased from reward shop · ${date}${time}</div></div><span class="coin-chip negative">−${spent} coins</span></div></article>`;
+    }
+    if(entry.kind==='adjustment'){
+      const positive=Number(entry.coinDelta)>0,delta=Number(entry.coinDelta)||0;
+      const value=(positive?'+':'')+delta+' coins';
+      return `<article class="log-entry adjustment"><div class="log-title"><div><div class="log-name">Manual coin ${positive?'addition':'removal'}</div><div class="log-meta">${esc(entry.reason||entry.name)} · ${date}${time}</div></div><span class="coin-chip manual">${esc(value)}</span></div></article>`;
+    }
+    const label=entry.status==='pending'?'Awaiting completion':entry.status==='completed'?'Completed':'Not completed';
+    const isPending=entry.status==='pending';
+    const taskStateClass=isPending?'pending':entry.status==='completed'?'completed':'not-completed';
+    const delta=Number(entry.coinDelta)||0;
+    const coinLabel=delta>0?'+'+delta+' coins':(entry.status==='not_completed'?'0 coins':'Awaiting result');
+    const chipClass=delta>0?'coin-chip positive':'coin-chip';
+    const range=entry.endTime?` · ${esc(entry.time)} – ${entry.endDate?prettyDate(entry.endDate)+' ':''}${esc(entry.endTime)}`:'';
+    const recurring=entry.recurring?' · Repeating activity':'';
+    const actions=isPending?`<div class="log-actions"><button type="button" class="primary mark-done" data-id="${entry.id}">Done · +${Number(entry.rewardCoins)||0} coins</button><button type="button" class="danger mark-notdone" data-id="${entry.id}">Not done</button></div>`:'';
+    return `<article class="log-entry task ${taskStateClass}"><div class="log-title"><div><div class="log-name">${esc(entry.name)} <span class="tag ${esc(entry.urgency)}">${esc(entry.urgency)}</span></div><div class="log-meta">${label}${recurring} · ${date}${entry.endTime?range:time}</div></div><span class="${chipClass}">${esc(coinLabel)}</span></div>${actions}</article>`;
+  }).join('');
+  const moreButton=list.length>visibleList.length?`<button class="log-more-button" id="showMoreTaskLog" type="button">Show ${Math.min(100,list.length-visibleList.length)} more entries (${visibleList.length}/${list.length})</button>`:'';
+  $('rewardLog').innerHTML=capacityNotice+html+moreButton;
+  const showMore=$('showMoreTaskLog');if(showMore)showMore.addEventListener('click',()=>{taskLogVisibleLimit+=100;renderFilteredTaskLog()});
+  $('rewardLog').querySelectorAll('.mark-done').forEach(button=>button.addEventListener('click',()=>answerTask(button.dataset.id,true)));
+  $('rewardLog').querySelectorAll('.mark-notdone').forEach(button=>button.addEventListener('click',()=>answerTask(button.dataset.id,false)));
+}
+function setLogLoadState(message,retry=false){
+  const html=message+(retry?' <button type="button" class="retry-reward-log">Retry</button>':'');
+  $('logLoadState').innerHTML=html;$('pomodoroLoadState').innerHTML=html;
+  document.querySelectorAll('.retry-reward-log').forEach(button=>button.addEventListener('click',()=>refreshRewardLog()));
+}
+function renderRewardLog(data,append=false,renderViews=true){
+  if(data.storageHealthy===false){
+    $('coinBalance').textContent='Unavailable';$('shopCoinBalance').textContent='Balance unavailable';$('logCount').textContent='Storage issue';$('coinSubmit').disabled=true;
+    $('rewardLog').innerHTML='<div class="log-capacity-warning">The reward ledger could not be read safely. Existing ledger files have been preserved. Check the ESP32 Serial Monitor before making changes.</div>';
+    $('pomodoroLog').innerHTML='<div class="log-capacity-warning">The activity ledger is unavailable.</div>';setLogLoadState('Activity history unavailable.');return;
+  }
+  $('coinSubmit').disabled=false;
+  $('coinBalance').innerHTML=`${Number(data.balance||0).toLocaleString()} <small>coins</small>`;
+  $('shopCoinBalance').textContent=`${Number(data.balance||0).toLocaleString()} coins available`;
+  rewardCapacity=Number(data.maxEntries)||500;
+  rewardSnapshot=Number(data.snapshotTotal??data.totalEntries??data.entries?.length??0);
+  rewardNextOffset=Number(data.nextOffset)||0;rewardHasMore=!!data.hasMore;rewardSummary=data;
+  if(!append&&data.revision!==undefined)lastLogRevision=Number(data.revision);
+  const incoming=Array.isArray(data.entries)?data.entries:[];
+  if(!append)rewardEntries=incoming.slice();
+  else{
+    const known=new Set(rewardEntries.map(entry=>Number(entry.id)));
+    incoming.forEach(entry=>{if(!known.has(Number(entry.id))){rewardEntries.push(entry);known.add(Number(entry.id))}});
+  }
+  const taskCount=Number(data.taskEntryCount??rewardEntries.filter(e=>e.kind==='task'||e.kind==='adjustment'||e.kind==='purchase').length);
+  const pomodoroCount=Number(data.pomodoroEntryCount??rewardEntries.filter(e=>e.kind==='pomodoro').length);
+  $('logCount').textContent=`${taskCount} tasks/coins/shop · ${pomodoroCount} Pomodoro`;
+  if(renderViews)renderLoadedRewardViews();
+  if(rewardHasMore)setLogLoadState(`Loaded ${rewardEntries.length} of ${rewardSnapshot} history entries${renderViews?' · loading older entries…':' · retrieving older entries in the background…'}`);
+  else setLogLoadState(`All ${rewardEntries.length} history entries loaded.`);
+}
+function renderLoadedRewardViews(){
+  renderFilteredTaskLog();
+  if(rewardSummary)renderPomodoroLog({...rewardSummary,entries:rewardEntries.filter(entry=>entry.kind==='pomodoro')});
+}
+function renderPomodoroLog(data){
+  if(data.storageHealthy===false){$('pomodoroLog').innerHTML='<div class="log-capacity-warning">The activity ledger is unavailable.</div>';return}
+  const entries=Array.isArray(data.entries)?data.entries.slice():[];
+  const focusRate=Number(data.focusCoinsPerMinute??3);
+  const breakRate=Number(data.breakCoinsPerMinute??1);
+  $('pomoStudyTotal').textContent=formatDuration(data.studySeconds||0);
+  $('pomoBreakTotal').textContent=formatDuration(data.breakSeconds||0);
+  $('pomoCoinsTotal').textContent='+'+Number(data.pomodoroCoinsEarned??data.coinsEarned??0);
+  if(!entries.length){$('pomodoroLog').innerHTML=`<div class="log-empty">${rewardHasMore?'No Pomodoro sessions in the newest page yet. Older history is still loading.':'No Pomodoro sessions recorded yet. Complete, skip or reset a phase to record its active time.'}</div>`;return}
+  entries.sort((a,b)=>`${b.date||''} ${b.time||''}`.localeCompare(`${a.date||''} ${a.time||''}`));
+  const visibleEntries=entries.slice(0,pomoLogVisibleLimit);
+  const html=visibleEntries.map(entry=>{
+    const focus=entry.pomodoroStage==='focus',longBreak=entry.pomodoroStage==='long_break';
+    const title=focus?'Study session':longBreak?'Long break':'Short break';
+    const className=focus?'pomo-focus':longBreak?'pomo-long-break':'pomo-break';
+    const date=entry.date?prettyDate(entry.date):'Date unavailable';
+    const period=entry.endTime?`${esc(entry.time||'')} – ${entry.endDate&&entry.endDate!==entry.date?prettyDate(entry.endDate)+' ':''}${esc(entry.endTime)}`:esc(entry.time||'');
+    const duration=formatDuration(entry.durationSeconds);
+    const coins=Number(entry.coinDelta)||0;
+    const minutes=Number(entry.earnedMinutes)||0;
+    const coinText=(coins>=0?'+':'')+coins+' coins';
+    return `<article class="log-entry ${className}"><div class="log-title"><div><div class="log-name">${title}</div><div class="log-meta">${date} · ${period} · ${duration} active time</div><div class="log-meta">${minutes} reward minute${minutes===1?'':'s'} accrued at ${minutes>0?coins/minutes:(focus?focusRate:breakRate)} coin${(minutes>0?coins/minutes:(focus?focusRate:breakRate))===1?'':'s'} per minute</div></div><span class="coin-chip ${coins>0?'positive':''}">${coinText}</span></div></article>`;
+  }).join('');
+  const more=entries.length>visibleEntries.length?`<button class="log-more-button" id="showMorePomodoroLog" type="button">Show ${Math.min(100,entries.length-visibleEntries.length)} more sessions (${visibleEntries.length}/${entries.length})</button>`:'';
+  $('pomodoroLog').innerHTML=html+more;
+  const showMore=$('showMorePomodoroLog');if(showMore)showMore.addEventListener('click',()=>{pomoLogVisibleLimit+=100;renderPomodoroLog({...data,entries})});
+}
+async function loadRemainingRewardPages(generation){
+  if(rewardPageBusy)return;
+  rewardPageBusy=true;
+  try{
+    while(rewardHasMore&&generation===rewardLoadGeneration&&currentMainTab==='logs'){
+      const url=`/api/rewards?offset=${rewardNextOffset}&limit=40&snapshot=${rewardSnapshot}`;
+      const data=await api(url,{priority:3});
+      if(generation!==rewardLoadGeneration)return;
+      if(!Array.isArray(data.entries)||!data.entries.length){rewardHasMore=false;break}
+      renderRewardLog(data,true,false);
+      setLogLoadState(`Loaded ${rewardEntries.length} of ${rewardSnapshot} history entries…`);
+      // Yield to browser input/rendering and let newly queued foreground requests
+      // take priority before retrieving another history page.
+      await new Promise(resolve=>setTimeout(resolve,35));
+    }
+  }catch(error){
+    if(generation===rewardLoadGeneration)setLogLoadState(`Loaded ${rewardEntries.length} of ${rewardSnapshot}. ${esc(error.message)}`,true);
+  }finally{
+    rewardPageBusy=false;
+    if(generation===rewardLoadGeneration){
+      renderLoadedRewardViews();
+      if(!rewardHasMore)setLogLoadState(`All ${rewardEntries.length} history entries loaded.`);
+      else if(currentMainTab!=='logs')setLogLoadState(`Loaded ${rewardEntries.length} of ${rewardSnapshot}; older entries will load when Logs is reopened.`);
+    }
+    if(rewardReloadRequested&&currentMainTab==='logs'){
+      rewardReloadRequested=false;
+      refreshLatestRewardPage(1);
+    }
+  }
+}
+async function refreshRewardLog(priority=0){
+  if(rewardInitialBusy||rewardPageBusy){rewardReloadRequested=true;return}
+  rewardReloadRequested=false;
+  const generation=++rewardLoadGeneration;
+  rewardInitialBusy=true;rewardEntries=[];rewardSummary=null;rewardSnapshot=0;rewardNextOffset=0;rewardHasMore=false;
+  taskLogVisibleLimit=100;pomoLogVisibleLimit=100;
+  $('rewardLog').innerHTML='<div class="log-empty">Loading recent activity…</div>';
+  $('pomodoroLog').innerHTML='<div class="log-empty">Loading Pomodoro history…</div>';
+  setLogLoadState('Connecting to the activity ledger…');
+  try{
+    const data=await api('/api/rewards?offset=0&limit=40',{priority});
+    if(generation!==rewardLoadGeneration)return;
+    if(!data||!Array.isArray(data.entries))throw Error('The activity ledger returned an invalid response.');
+    renderRewardLog(data,false,true);
+  }catch(error){
+    if(generation===rewardLoadGeneration){$('rewardLog').innerHTML=`<div class="log-empty">Could not load the reward log: ${esc(error.message)}</div>`;$('pomodoroLog').innerHTML='<div class="log-empty">Pomodoro history is unavailable until the activity ledger loads.</div>';setLogLoadState('Could not load history.',true)}
+  }finally{rewardInitialBusy=false}
+  if(generation===rewardLoadGeneration&&rewardHasMore&&currentMainTab==='logs')loadRemainingRewardPages(generation);
+  if(rewardReloadRequested&&currentMainTab==='logs'&&!rewardPageBusy){rewardReloadRequested=false;refreshLatestRewardPage(1)}
+}
+async function refreshLatestRewardPage(priority=2){
+  if(!rewardSummary){return refreshRewardLog(priority)}
+  if(rewardInitialBusy||rewardPageBusy){rewardReloadRequested=true;return}
+  const generation=++rewardLoadGeneration;
+  const previousEntries=rewardEntries.slice();
+  const previousSnapshot=rewardSnapshot;
+  const historyWasComplete=!rewardHasMore&&previousEntries.length>=previousSnapshot;
+  try{
+    const data=await api('/api/rewards?offset=0&limit=40',{priority});
+    if(generation!==rewardLoadGeneration)return;
+    if(!data||!Array.isArray(data.entries))throw Error('The activity ledger returned an invalid response.');
+    const newestIds=new Set(data.entries.map(entry=>Number(entry.id)));
+    rewardEntries=data.entries.concat(previousEntries.filter(entry=>!newestIds.has(Number(entry.id))));
+    rewardSummary=data;
+    rewardSnapshot=Number(data.snapshotTotal??data.totalEntries??rewardEntries.length);
+    rewardNextOffset=Number(data.nextOffset)||data.entries.length;
+    const newlyAddedCount=Math.max(0,rewardSnapshot-previousSnapshot);
+    const allNewRowsWereInFirstPage=historyWasComplete&&newlyAddedCount<=data.entries.length;
+    rewardHasMore=allNewRowsWereInFirstPage?false:!!data.hasMore;
+    if(allNewRowsWereInFirstPage)rewardNextOffset=rewardSnapshot;
+    lastLogRevision=Number(data.revision||lastLogRevision||0);
+    $('coinBalance').innerHTML=`${Number(data.balance||0).toLocaleString()} <small>coins</small>`;
+    $('shopCoinBalance').textContent=`${Number(data.balance||0).toLocaleString()} coins available`;
+    $('logCount').textContent=`${Number(data.taskEntryCount||0)} tasks/coins/shop · ${Number(data.pomodoroEntryCount||0)} Pomodoro`;
+    rewardCapacity=Number(data.maxEntries)||rewardCapacity;
+    renderLoadedRewardViews();
+    if(rewardHasMore&&currentMainTab==='logs')loadRemainingRewardPages(generation);
+    else setLogLoadState(`All ${rewardEntries.length} history entries loaded.`);
+  }catch(error){
+    if(generation===rewardLoadGeneration)setLogLoadState(`History refresh failed; showing saved entries. ${esc(error.message)}`,true);
+  }
+}
+function refreshPomodoroLog(){
+  if(!rewardSummary){$('pomodoroLog').innerHTML='<div class="log-empty">Open the Logs tab to load Pomodoro history.</div>';return}
+  renderPomodoroLog({...rewardSummary,entries:rewardEntries.filter(entry=>entry.kind==='pomodoro')});
+}
+function setLogTab(tab){
+  currentLogTab=tab;const isPomo=tab==='pomodoro';$('taskLogPane').hidden=isPomo;$('pomodoroLogPane').hidden=!isPomo;
+  $('taskLogTab').classList.toggle('active',!isPomo);$('pomodoroLogTab').classList.toggle('active',isPomo);
+  $('taskLogTab').setAttribute('aria-selected',String(!isPomo));$('pomodoroLogTab').setAttribute('aria-selected',String(isPomo));
+  if(isPomo)refreshPomodoroLog();
+}
+$('taskLogTab').addEventListener('click',()=>setLogTab('tasks'));$('pomodoroLogTab').addEventListener('click',()=>setLogTab('pomodoro'));
+const urgencyFilterIds=['logUrgencyLow','logUrgencyMedium','logUrgencyHigh'];
+function updateUrgencyFilter(changedId){
+  if(changedId==='logUrgencyAll'){
+    const checked=$('logUrgencyAll').checked;
+    urgencyFilterIds.forEach(id=>$(id).checked=checked);
+  } else {
+    $('logUrgencyAll').checked=urgencyFilterIds.every(id=>$(id).checked);
+  }
+  renderFilteredTaskLog();
+}
+['logUrgencyAll',...urgencyFilterIds].forEach(id=>$(id).addEventListener('change',()=>updateUrgencyFilter(id)));
+['logSource','logStatus','logFrom','logTo','logSort','logSearch'].forEach(id=>$(id).addEventListener(id==='logSearch'?'input':'change',renderFilteredTaskLog));
+$('clearLogFilters').addEventListener('click',()=>{['logUrgencyAll',...urgencyFilterIds].forEach(id=>$(id).checked=true);['logSource','logStatus'].forEach(id=>$(id).value='all');$('logSort').value='newest';$('logFrom').value='';$('logTo').value='';$('logSearch').value='';renderFilteredTaskLog()});
+async function answerTask(id,done){try{const result=await api('/api/rewards/complete',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:Number(id),done})});if(result.balance!==undefined)$('coinBalance').innerHTML=`${Number(result.balance).toLocaleString()} <small>coins</small>`;const entry=rewardEntries.find(item=>Number(item.id)===Number(id));if(entry){entry.status=result.status|| (done?'completed':'not_completed');entry.coinDelta=Number(result.coinDelta??result.awarded)||0;renderFilteredTaskLog()}if(result.revision!==undefined)lastLogRevision=Number(result.revision);toast(done?`Task completed · +${result.awarded} coins`:'Task marked not completed')}catch(e){toast(e.message)}}
+$('coinForm').addEventListener('submit',async e=>{e.preventDefault();const button=$('coinSubmit');button.disabled=true;try{const payload={action:$('coinAction').value,amount:Number($('coinAmount').value),reason:$('coinReason').value.trim()};const result=await api('/api/rewards/adjust',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(result.balance!==undefined)$('coinBalance').innerHTML=`${Number(result.balance).toLocaleString()} <small>coins</small>`;$('coinReason').value='';toast(payload.action==='add'?'Coins added':'Coins removed');refreshLatestRewardPage(2)}catch(err){toast(err.message)}finally{button.disabled=false}});
+
+async function refreshEvents(priority=1){try{const [events,repeats]=await Promise.all([api('/api/events',{priority}),api('/api/repeats',{priority})]);renderEvents(events);renderRepeats(repeats);$('dot').classList.add('online');$('connection').textContent='Bluetooth connected'}catch(e){$('dot').classList.remove('online');$('connection').textContent='Bluetooth connection unavailable'}}
+async function removeEvent(id){try{await api('/api/events?id='+encodeURIComponent(id),{method:'DELETE'});toast('Event removed');refreshEvents(2)}catch(e){toast(e.message)}}
+async function removeRepeating(id){try{await api('/api/repeats?id='+encodeURIComponent(id),{method:'DELETE'});toast('Repeating activity removed');refreshEvents(2)}catch(e){toast(e.message)}}
+$('durationEnabled').addEventListener('change',()=>{$('endFields').classList.toggle('visible',$('durationEnabled').checked);$('endDate').required=$('durationEnabled').checked;$('endTime').required=$('durationEnabled').checked;if($('durationEnabled').checked&&!$('endDate').value)$('endDate').value=$('date').value});
+$('date').addEventListener('change',()=>{if($('durationEnabled').checked&&(!$('endDate').value||$('endDate').value<$('date').value))$('endDate').value=$('date').value});
+$('eventForm').addEventListener('submit',async e=>{e.preventDefault();const b=$('addButton');b.disabled=true;try{const duration=$('durationEnabled').checked;const payload={name:$('name').value.trim(),date:$('date').value,time:$('time').value,endDate:duration?$('endDate').value:'',endTime:duration?$('endTime').value:'',urgency:$('urgency').value};await api('/api/events',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});$('name').value='';toast('Event saved');refreshEvents(2)}catch(err){toast(err.message)}finally{b.disabled=false}});
+const repeatDayIds=[0,1,2,3,4,5,6].map(day=>'repeatDay'+day);
+$('repeatForm').addEventListener('submit',async e=>{e.preventDefault();const b=$('repeatAddButton');b.disabled=true;try{const daysMask=repeatDayIds.reduce((mask,id,day)=>$(id).checked?(mask|(1<<day)):mask,0);if(!daysMask)throw Error('Select at least one day for this activity.');const payload={name:$('repeatName').value.trim(),time:$('repeatTime').value,endTime:$('repeatEndTime').value,daysMask,urgency:$('repeatUrgency').value};await api('/api/repeats',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});$('repeatName').value='';$('repeatEndTime').value='';toast('Repeating activity saved');refreshEvents(2)}catch(err){toast(err.message)}finally{b.disabled=false}});
+function updateRangeText(id){$(id+'Value').textContent=$(id).value+'%'}
+['nightBrightness','nightRedTintPercent','dayBrightness'].forEach(id=>$(id).addEventListener('input',()=>updateRangeText(id)));
+async function loadSettings(priority=1){try{const s=await api('/api/settings',{priority});$('nightEnabled').checked=s.nightDimmingEnabled;$('nightStart').value=s.nightStart;$('nightEnd').value=s.nightEnd;$('nightBrightness').value=s.nightBrightness;$('nightRedTintEnabled').checked=!!s.nightRedTintEnabled;$('nightRedTintPercent').value=s.nightRedTintPercent??20;$('dayBrightness').value=s.dayBrightness;updateRangeText('nightBrightness');updateRangeText('nightRedTintPercent');updateRangeText('dayBrightness')}catch(e){toast('Could not load display settings')}}
+$('settingsForm').addEventListener('submit',async e=>{e.preventDefault();try{await api('/api/settings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nightDimmingEnabled:$('nightEnabled').checked,nightStart:$('nightStart').value,nightEnd:$('nightEnd').value,nightBrightness:Number($('nightBrightness').value),nightRedTintEnabled:$('nightRedTintEnabled').checked,nightRedTintPercent:Number($('nightRedTintPercent').value),dayBrightness:Number($('dayBrightness').value)})});toast('Display settings saved')}catch(err){toast(err.message)}});
+function fmtSeconds(seconds){seconds=Math.max(0,Number(seconds)||0);const m=Math.floor(seconds/60),s=seconds%60;return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}
+async function refreshLogMeta(){
+  if(logMetaRequestBusy||currentMainTab!=='logs')return;
+  logMetaRequestBusy=true;
+  try{
+    const meta=await api('/api/logs/meta',{priority:3});
+    if(meta.storageHealthy===false)return;
+    const revision=Number(meta.revision||0);
+    if(lastLogRevision!==null&&revision!==lastLogRevision){
+      const liveCount=Number(meta.entryCount||0);
+      // A changed row (for example a task answered from another browser) does
+      // not increase the count, so reload the snapshot. New rows can be merged
+      // from the newest page without downloading the already-loaded history.
+      if(liveCount===rewardSnapshot)refreshRewardLog(2);
+      else refreshLatestRewardPage(2);
+    }
+    lastLogRevision=revision;
+  }catch(e){/* Full history stays visible if the lightweight revision check fails. */}
+  finally{logMetaRequestBusy=false}
+}
+function applyPomodoroState(p,checkLogRevision=true){
+  const previousSequence=lastPomodoroStageSequence;
+  lastPomodoroStageSequence=Number(p.stageSequence||0);
+  pomoDisplayState=p;pomoDisplaySyncedAt=Date.now();pomoZeroSyncRequested=false;paintPomodoroClock();
+  $('pomoStage').textContent=p.running?p.mode:(p.mode==='Idle'?'Idle':'Paused · '+p.mode);
+  const interval=Number(p.longBreakEvery)||4;const cycle=p.mode==='Long break'?'Long break':`${Number(p.sessionsSinceLongBreak||0)}/${interval} toward long break`;
+  $('pomoSessions').textContent=p.activityLogFull?'Activity log full · export history and increase MAX_TASK_LOG_ENTRIES':`${p.completedSessions} focus sessions counted (including skips) · ${cycle} · ${formatDuration(p.elapsedSeconds||0)} active in this phase${p.timeSynced?'':' · waiting for clock sync'}`;
+  if(!pomoSettingsDirty&&!pomoSettingsEditing)applyPomodoroSettingsToForm(p);
+  $('pomoStart').textContent=p.running?'Running':'Start';$('pomoStart').disabled=p.running||!p.timeSynced;$('pomoPause').disabled=!p.running;$('pomoSkip').disabled=p.mode==='Idle';$('pomoSkip').textContent=p.mode==='Focus'?'Skip to break':'Skip to studying';
+  if(checkLogRevision&&currentMainTab==='logs'&&previousSequence!==null&&lastPomodoroStageSequence!==previousSequence&&rewardSummary)refreshLogMeta();
+}
+function paintPomodoroClock(){
+  if(!pomoDisplayState)return;
+  const elapsed=pomoDisplayState.running?Math.floor((Date.now()-pomoDisplaySyncedAt)/1000):0;
+  const remaining=Math.max(0,Number(pomoDisplayState.remainingSeconds||0)-elapsed);
+  $('pomoClock').textContent=fmtSeconds(remaining);
+  // Request an immediate transition sync once the local countdown reaches zero;
+  // normal background polling can therefore be reduced to every 30 seconds.
+  if(pomoDisplayState.running&&remaining===0&&!pomoZeroSyncRequested){
+    pomoZeroSyncRequested=true;
+    refreshPomodoro(0);
+  }
+}
+async function refreshPomodoro(priority=3){
+  try{const p=await api('/api/pomodoro',{priority});applyPomodoroState(p)}
+  catch(e){/* Keep the last known timer state visible during a brief Wi-Fi delay. */}
+}
+async function pomoAction(action){
+  try{
+    const p=await api('/api/pomodoro',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action})});
+    applyPomodoroState(p,false);
+    if(action==='skip'||action==='reset')refreshLatestRewardPage(2);
+    toast(action==='reset'?'Timer reset and time recorded':action==='pause'?'Timer paused':action==='skip'?'Skipped to the next phase':'Timer started');
+  }catch(e){toast(e.message)}
+}
+$('pomoStart').addEventListener('click',()=>pomoAction('start'));$('pomoPause').addEventListener('click',()=>pomoAction('pause'));$('pomoSkip').addEventListener('click',()=>pomoAction('skip'));$('pomoReset').addEventListener('click',()=>pomoAction('reset'));
+$('pomoSettingsForm').addEventListener('focusin',()=>{pomoSettingsEditing=true});
+$('pomoSettingsForm').addEventListener('focusout',()=>{setTimeout(()=>{pomoSettingsEditing=$('pomoSettingsForm').contains(document.activeElement)},0)});
+$('pomoSettingsForm').addEventListener('input',()=>{pomoSettingsDirty=true});
+$('pomoSettingsForm').addEventListener('submit',async e=>{e.preventDefault();const button=$('pomoSettingsForm').querySelector('button[type=submit]');button.disabled=true;try{const saved=await api('/api/pomodoro',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'settings',focusMinutes:Number($('focusMinutes').value),shortBreakMinutes:Number($('shortBreakMinutes').value),longBreakMinutes:Number($('longBreakMinutes').value),longBreakEvery:Number($('longBreakEvery').value)})});pomoSettingsDirty=false;applyPomodoroSettingsToForm(saved);applyPomodoroState(saved);toast('Pomodoro settings saved')}catch(err){toast(err.message)}finally{button.disabled=false}});
+function setMainTab(name){
+  currentMainTab=name;
+  const tabs=[['add','mainAddTab','mainAddPane'],['logs','mainLogsTab','mainLogsPane'],['shop','mainShopTab','mainShopPane']];
+  tabs.forEach(([key,tabId,paneId])=>{const active=key===name;$(tabId).classList.toggle('active',active);$(tabId).setAttribute('aria-selected',String(active));$(paneId).hidden=!active});
+  if(name==='logs'){
+    refreshRewardLog(0);
+    refreshPomodoro(0);
+  }
+  if(name==='shop')refreshShop(0);
+  if(name==='add')refreshEvents(0);
+}
+$('mainAddTab').addEventListener('click',()=>setMainTab('add'));
+$('mainLogsTab').addEventListener('click',()=>setMainTab('logs'));
+$('mainShopTab').addEventListener('click',()=>setMainTab('shop'));
+async function initialiseDashboardAfterBle(){
+  if(dashboardLoaded)return;dashboardLoaded=true;
+  try{
+    let status=await api('/api/status',{priority:0});
+    if(!status.time_synced){
+      const epoch=Math.floor(Date.now()/1000);
+      const synced=await api('/api/time',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({epoch}),priority:0});
+      status={...status,...synced};
+      if(synced.time_synced)toast('Device clock synchronised from this phone/computer');
+    }
+    if(status.date)$('date').value=status.date;
+  }catch(e){dashboardLoaded=false;setBleConnectionState(false,'Connected, but API did not respond');throw e}
+  if(!$('date').value){const d=new Date();$('date').value=[d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')}
+  $('endDate').value=$('date').value;
+  await Promise.all([refreshEvents(2),loadSettings(2)]);
+  if(!window.daylightIntervalsStarted){window.daylightIntervalsStarted=true;
+    setInterval(()=>{if(bleConnected&&currentMainTab==='add')refreshEvents(3)},60000);
+    setInterval(()=>{if(bleConnected&&currentMainTab==='logs')refreshPomodoro(3)},30000);
+    setInterval(()=>{if(bleConnected&&currentMainTab==='logs')refreshLogMeta()},30000);
+    setInterval(paintPomodoroClock,1000);
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden&&bleConnected){if(currentMainTab==='logs'){refreshPomodoro(0);refreshLogMeta()}else if(currentMainTab==='add')refreshEvents(2)}});
+  }
+}
+async function init(){
+  if('serviceWorker' in navigator && location.protocol==='https:'){
+    try{
+      await navigator.serviceWorker.register('./service-worker.js');
+      await navigator.serviceWorker.ready;
+      $('connection').textContent='Offline app ready · Bluetooth not connected';
+    }catch(e){console.warn('Offline app cache registration failed',e)}
+  }else if(location.protocol!=='https:'&&location.hostname!=='localhost'){
+    $('connection').textContent='Open this app from an HTTPS address';
+  }
+  const d=new Date();$('date').value=[d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-');
+  $('endDate').value=$('date').value;
+  setBleConnectionState(false,'Bluetooth not connected');
+  if(!navigator.bluetooth){$('connection').textContent='Chrome / Edge required · HTTPS app';$('bleConnectButton').textContent='Browser unsupported';$('bleConnectButton').title='Web Bluetooth is unavailable in Firefox and Safari.'}
+}
+init();
+</script>
+</body>
+</html>
